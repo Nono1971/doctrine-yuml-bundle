@@ -1,0 +1,3 @@
+doctrine_yuml_mapping:
+    path:     /yuml
+    defaults: { _controller: OnurbYumlBundle:Yuml:index }
