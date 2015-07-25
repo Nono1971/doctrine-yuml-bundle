@@ -1,1 +1,6 @@
 services:
+    onurb.doctrine_yuml.icon:
+        class: Onurb\Bundle\YumlBundle\Twig\InsertIconFilter
+        arguments: ['@router']
+        tags:
+            - { name: twig.extension }
