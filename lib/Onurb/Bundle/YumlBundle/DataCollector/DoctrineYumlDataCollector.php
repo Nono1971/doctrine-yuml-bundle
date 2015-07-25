@@ -1,5 +1,5 @@
 <?php
-namespace Onurb\Bundle\yumlBundle\DataCollector;
+namespace Onurb\Bundle\YumlBundle\DataCollector;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
