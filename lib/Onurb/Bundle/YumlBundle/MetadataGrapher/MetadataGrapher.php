@@ -201,7 +201,7 @@ class MetadataGrapher
      *
      * @return ClassMetadata|null
      */
-    private function getParent($class)
+    private function getParent(ClassMetadata $class)
     {
         $className = $class->getName();
 
