@@ -50,5 +50,3 @@ Installing this bundle can be done through these simple steps:
 
 ## Use
 Click on Doctrine icon added in the dev toolbar
-
-
