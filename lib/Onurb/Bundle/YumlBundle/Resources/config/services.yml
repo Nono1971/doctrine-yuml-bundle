@@ -1,6 +1,6 @@
 services:
-    onurb.doctrine_yuml.icon:
-        class: Onurb\Bundle\YumlBundle\Twig\InsertIconFilter
-        arguments: ['@router']
+    onurb.doctrine_yuml.toolbar:
+        class: Onurb\Bundle\YumlBundle\DataCollector\DoctrineYumlDataCollector
+        arguments: []
         tags:
-            - { name: twig.extension }
+            - { name: data_collector, template: OnurbYumlBundle:Toolbar:toolbar.html.twig, id: "doctrine_yuml" }

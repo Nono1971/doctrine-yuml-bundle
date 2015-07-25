@@ -2,7 +2,7 @@
 Bundle to visualise doctrine mapping with yuml in Symfony2
 
 This bundle is based on Marco Pivetta's work for zend doctrine ORM Module and zend developper tools
-It uses the yuml api to display the doctrine data mapping.
+It uses the yuml api to display your project's objects mapping.
 
 
 ## Installation
@@ -47,13 +47,8 @@ Installing this bundle can be done through these simple steps:
         prefix:   /
 ```
 
-- Copy this complete folder from your vendor lib/Onurb/Bundle/YumlBundle/Resources/WebProfilerBundle/ in the folder app/resources
-=> is overwrites a view from sensio\WebProfilerBundle to add an icon in the dev toolbar
 
 ## Use
-in the toolbar
-
-The controller gets all metadata from Doctrine, sends data to yuml.me
-and redirects to the mapping page given by the api
+Click on Doctrine icon added in the dev toolbar
 
 
