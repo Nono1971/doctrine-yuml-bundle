@@ -37,9 +37,10 @@ Installing this bundle can be done through these simple steps:
     }
 ```
 
-- Add this route in your global routing configuration
+- Add this route in your global routing_dev configuration
+    of course, you can add a prefix if you want
 ```yml
-    # app/config/routing.yml
+    # app/config/routing_dev.yml
 
     # ...
     doctrine_yuml:
@@ -47,6 +48,7 @@ Installing this bundle can be done through these simple steps:
         prefix:   /
 ```
 
+configure access to the yuml route (if you use security of course)
 
 ## Use
 Click on Doctrine icon added in the dev toolbar

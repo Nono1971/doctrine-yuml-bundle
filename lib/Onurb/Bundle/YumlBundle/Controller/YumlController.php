@@ -20,7 +20,27 @@ use Onurb\Bundle\YumlBundle\MetadataGrapher\MetadataGrapher;
  */
 class YumlController extends Controller
 {
+    const YUML_POST_URL = 'http://yuml.me/diagram/plain/class';
+    const YUML_REDIRECT_URL = 'http://yuml.me/';
+
     public function indexAction()
+    {
+        $dsl_text = $this->makeDslText();
+
+        $schema = $this->container
+            ->get('buzz')
+            ->post(
+                self::YUML_POST_URL,
+                array(),            //headers
+                compact('dsl_text') //content
+            )
+            ->getContent()
+        ;
+
+        return $this->redirect(self::YUML_REDIRECT_URL . $schema);
+    }
+
+    private function makeDslText()
     {
         $metadataFactory = new ClassMetadataFactory;
         $metadataFactory->setEntityManager($this->getDoctrine()->getManager());
@@ -33,18 +53,6 @@ class YumlController extends Controller
         ksort($classes);
 
         $metagrapher = new MetadataGrapher;
-        $dsl_text = $metagrapher->generateFromMetadata($classes);
-
-        $schema = $this->container
-            ->get('buzz')
-            ->post(
-                'http://yuml.me/diagram/plain/class',
-                array(),            //headers
-                compact('dsl_text') //content
-            )
-            ->getContent()
-        ;
-
-        return $this->redirect('http://yuml.me/'. $schema);
+        return $metagrapher->generateFromMetadata($classes);
     }
 }
