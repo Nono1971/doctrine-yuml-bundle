@@ -40,19 +40,47 @@ class YumlController extends Controller
         return $this->redirect(self::YUML_REDIRECT_URL . $schema);
     }
 
+    /**
+     * @return string
+     */
     private function makeDslText()
+    {
+        $classes = $this->getClasses();
+        return $this->generateGraph($classes);
+    }
+
+    /**
+     * @return array
+     */
+    private function getMetadata()
     {
         $metadataFactory = new ClassMetadataFactory;
         $metadataFactory->setEntityManager($this->getDoctrine()->getManager());
-        $metadata = $metadataFactory->getAllMetadata();
+        return $metadataFactory->getAllMetadata();
+    }
 
+    /**
+     * @param $metadata
+     * @return array
+     */
+    private function getClasses()
+    {
         $classes = array();
-        foreach ($metadata as  $class) {
+        foreach ($this->getMetadata() as $class) {
             $classes[$class->getName()] = $class;
         }
         ksort($classes);
+        return $classes;
+    }
 
+    /**
+     * @param $classes
+     * @return string
+     */
+    private function generateGraph($classes)
+    {
         $metagrapher = new MetadataGrapher;
-        return $metagrapher->generateFromMetadata($classes);
+        $graph = $metagrapher->generateFromMetadata($classes);
+        return $graph;
     }
 }
