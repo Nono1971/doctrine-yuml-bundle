@@ -13,10 +13,10 @@ class Curl
     public function __construct($url)
     {
         $this->curl = curl_init();
-        curl_setopt($this->curl,CURLOPT_URL, $url);
+        curl_setopt($this->curl, CURLOPT_URL, $url);
 
-        curl_setopt($this->curl,CURLOPT_SSL_VERIFYPEER,false);
-        curl_setopt($this->curl,CURLOPT_TIMEOUT,15);
+        curl_setopt($this->curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($this->curl, CURLOPT_TIMEOUT, 15);
     }
 
     /**
@@ -24,8 +24,8 @@ class Curl
      */
     public function setPosts($posts)
     {
-        curl_setopt($this->curl,CURLOPT_POST,count($posts));
-        curl_setopt($this->curl,CURLOPT_POSTFIELDS,$this->formatCurlPostsString($posts));
+        curl_setopt($this->curl, CURLOPT_POST, count($posts));
+        curl_setopt($this->curl, CURLOPT_POSTFIELDS, $this->formatCurlPostsString($posts));
     }
 
     /**
@@ -33,7 +33,7 @@ class Curl
      */
     public function getResponse()
     {
-        curl_setopt($this->curl,CURLOPT_RETURNTRANSFER,true);
+        curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, true);
         $return = curl_exec($this->curl);
         curl_close($this->curl);
         $this->curl = null;
@@ -50,7 +50,7 @@ class Curl
         foreach($posts as $key => $post){
             $tmp[] = $this->formatCurlPostItem($key, $post);
         }
-        return implode('&',$tmp);
+        return implode('&', $tmp);
     }
 
     /**
@@ -58,8 +58,7 @@ class Curl
      * @param string $value
      * @return string
      */
-    private function formatCurlPostItem($key,$value){
+    private function formatCurlPostItem($key, $value){
         return $key . '=' . urlencode($value);
     }
-
 }

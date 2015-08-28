@@ -86,6 +86,4 @@ class YumlController extends Controller
 
         return self::YUML_REDIRECT_URL . $return;
     }
-
-
 }
