@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping\ClassMetadataFactory;
 use Doctrine\ORM\Mapping\ClassMetadata;
 
 use Onurb\Bundle\YumlBundle\MetadataGrapher\MetadataGrapher;
+use Onurb\Bundle\YumlBundle\Curl\Curl;
 
 
 /**
@@ -26,10 +27,7 @@ class YumlController extends Controller
 
     public function indexAction()
     {
-        $dsl_text = $this->makeDslText();
-        $schema = $this->getGraphlUrl($dsl_text);
-
-        return $this->redirect(self::YUML_REDIRECT_URL . $schema);
+        return $this->redirect($this->getGraphUrl($this->makeDslText()));
     }
 
     /**
@@ -37,8 +35,7 @@ class YumlController extends Controller
      */
     private function makeDslText()
     {
-        $classes = $this->getClasses();
-        return $this->generateGraph($classes);
+        return $this->generateGraph($this->getClasses());
     }
 
     /**
@@ -82,26 +79,13 @@ class YumlController extends Controller
      * @param string $dsl_text
      * @return string
      */
-    private function getGraphlUrl($dsl_text){
-        $poststring = $this->formatCurlPostPostString($dsl_text);
-        $curl = curl_init();
-        curl_setopt($curl,CURLOPT_URL, self::YUML_POST_URL);
-        curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
-        curl_setopt($curl,CURLOPT_SSL_VERIFYPEER,false);
-        curl_setopt($curl,CURLOPT_POST,1);
-        curl_setopt($curl,CURLOPT_POSTFIELDS,$poststring);
-        curl_setopt($curl,CURLOPT_TIMEOUT,15);
-        $return = curl_exec($curl);
-        curl_close($curl);
+    private function getGraphUrl($dsl_text){
+        $curl = new Curl(self::YUML_POST_URL);
+        $curl->setPosts(array('dsl_text' => $dsl_text));
+        $return = $curl->getResponse();
 
-        return $return;
+        return self::YUML_REDIRECT_URL . $return;
     }
 
-    /**
-     * @param string $dsl_text
-     * @return string
-     */
-    private function formatCurlPostPostString($dsl_text){
-        return 'dsl_text='.urlencode($dsl_text);
-    }
+
 }
