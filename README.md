@@ -1,5 +1,5 @@
 # doctrine-yuml-bundle
-Bundle to visualise doctrine mapping with yuml in Symfony2
+Bundle to visualise doctrine entities graph with yuml in Symfony2
 
 This bundle is based on Marco Pivetta's work for zend doctrine ORM Module and zend developper tools
 It uses the yuml api to display your project's objects mapping.
@@ -21,7 +21,7 @@ Installing this bundle can be done through these simple steps:
     }
 ```
 
-- Declare these bundles in your application kernel:
+- Declare the bundle in your application kernel:
 ```php
     // app/AppKernel.php
     public function registerBundles()
@@ -30,7 +30,6 @@ Installing this bundle can be done through these simple steps:
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
             // ...
 
-            $bundles[] = new Sensio\Bundle\BuzzBundle\SensioBuzzBundle();
             $bundles[] = new Onurb\Bundle\YumlBundle\OnurbYumlBundle();
         }
         return $bundles;
@@ -45,7 +44,7 @@ Installing this bundle can be done through these simple steps:
     # ...
     doctrine_yuml:
         resource: "@OnurbYumlBundle/Resources/config/routing.yml"
-        prefix:   /
+        prefix:   /my_prefix/
 ```
 
 configure access to the yuml route (if you use security of course)

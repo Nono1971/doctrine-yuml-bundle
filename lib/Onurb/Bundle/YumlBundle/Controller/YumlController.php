@@ -5,6 +5,7 @@ namespace Onurb\Bundle\YumlBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Doctrine\ORM\Mapping\ClassMetadataFactory;
+use Doctrine\ORM\Mapping\ClassMetadata;
 
 use Onurb\Bundle\YumlBundle\MetadataGrapher\MetadataGrapher;
 
@@ -26,16 +27,7 @@ class YumlController extends Controller
     public function indexAction()
     {
         $dsl_text = $this->makeDslText();
-
-        $schema = $this->container
-            ->get('buzz')
-            ->post(
-                self::YUML_POST_URL,
-                array(),            //headers
-                compact('dsl_text') //content
-            )
-            ->getContent()
-        ;
+        $schema = $this->getGraphlUrl($dsl_text);
 
         return $this->redirect(self::YUML_REDIRECT_URL . $schema);
     }
@@ -60,12 +52,14 @@ class YumlController extends Controller
     }
 
     /**
-     * @param $metadata
      * @return array
      */
     private function getClasses()
     {
         $classes = array();
+        /**
+         * @var ClassMetadata $class
+         */
         foreach ($this->getMetadata() as $class) {
             $classes[$class->getName()] = $class;
         }
@@ -82,5 +76,32 @@ class YumlController extends Controller
         $metagrapher = new MetadataGrapher;
         $graph = $metagrapher->generateFromMetadata($classes);
         return $graph;
+    }
+
+    /**
+     * @param string $dsl_text
+     * @return string
+     */
+    private function getGraphlUrl($dsl_text){
+        $poststring = $this->formatCurlPostPostString($dsl_text);
+        $curl = curl_init();
+        curl_setopt($curl,CURLOPT_URL, self::YUML_POST_URL);
+        curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
+        curl_setopt($curl,CURLOPT_SSL_VERIFYPEER,false);
+        curl_setopt($curl,CURLOPT_POST,1);
+        curl_setopt($curl,CURLOPT_POSTFIELDS,$poststring);
+        curl_setopt($curl,CURLOPT_TIMEOUT,15);
+        $return = curl_exec($curl);
+        curl_close($curl);
+
+        return $return;
+    }
+
+    /**
+     * @param string $dsl_text
+     * @return string
+     */
+    private function formatCurlPostPostString($dsl_text){
+        return 'dsl_text='.urlencode($dsl_text);
     }
 }
