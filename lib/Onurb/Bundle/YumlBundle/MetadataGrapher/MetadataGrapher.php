@@ -113,10 +113,9 @@ class MetadataGrapher
             }
         } else {
             foreach ($class2->getAssociationNames() as $class2Side) {
-                $associationTargetClassName = $class2->getAssociationTargetClass($class2Side);
-                $class              = $this->getClassByName($associationTargetClassName);
+                $targetClass = $this->getClassByName($class2->getAssociationTargetClass($class2Side));
                 if ($class2->isAssociationInverseSide($class2Side)
-                    && ($class1->getName() == $class->getName())
+                    && ($class1->getName() == $targetClass->getName())
                 ) {
                     $class2SideName = $class2Side;
                     $class2Count    = $class2->isCollectionValuedAssociation($class2SideName) ? 2 : 1;
