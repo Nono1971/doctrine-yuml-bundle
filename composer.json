@@ -1,15 +1,11 @@
 {
     "name":                 "onurb/doctrine-yuml-bundle",
     "description":          "Symfony2 Bundle to view Doctrine mapping with Yuml",
-    "keywords":             ["yuml", "mapping", "doctrine", "diagram","graph"],
+    "keywords":             ["yuml", "mapping", "doctrine", "diagram","graph", "uml","bundle","symfony"],
     "type":                 "symfony-bundle",
     "license":              "MIT",
     "minimum-stability":    "dev",
     "authors": [
-        {
-            "name":     "Fabien Potencier",
-            "email":    "fabien@symfony.com"
-        },
         {
             "name":     "Marco Pivetta",
             "email":    "ocramius@gmail.com"

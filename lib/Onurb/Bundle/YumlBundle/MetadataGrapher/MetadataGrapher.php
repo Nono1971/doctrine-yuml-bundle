@@ -57,9 +57,8 @@ class MetadataGrapher
         $str                       = array();
 
         foreach ($metadata as $class) {
-            $parent = $this->getParent($class);
 
-            if ($parent) {
+            if ($parent = $this->getParent($class)) {
                 $str[] = $this->getClassString($parent) . '^' . $this->getClassString($class);
             }
 
@@ -114,8 +113,10 @@ class MetadataGrapher
             }
         } else {
             foreach ($class2->getAssociationNames() as $class2Side) {
+                $associationTargetClassName = $class2->getAssociationTargetClass($class2Side);
+                $class              = $this->getClassByName($associationTargetClassName);
                 if ($class2->isAssociationInverseSide($class2Side)
-                    && ($association === $class2->getAssociationMappedByTargetField($class2Side))
+                    && ($class1->getName() == $class->getName())
                 ) {
                     $class2SideName = $class2Side;
                     $class2Count    = $class2->isCollectionValuedAssociation($class2SideName) ? 2 : 1;
