@@ -50,4 +50,6 @@ Installing this bundle can be done through these simple steps:
 configure access to the yuml route (if you use security of course)
 
 ## Use
-Click on Doctrine icon added in the dev toolbar
+Click on Doctrine icon added in the dev toolbar.
+
+Run the `yuml:mappings` console command to save the image locally.
