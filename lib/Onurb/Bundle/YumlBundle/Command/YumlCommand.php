@@ -34,31 +34,8 @@ class YumlCommand extends ContainerAwareCommand
         $filename = $input->getOption('filename');
 
         $graphUrl = $yumlClient->getGraphUrl($yumlClient->makeDslText());
-        $this->downloadImage($graphUrl, $filename);
+        $yumlClient->downloadImage($graphUrl, $filename);
 
         $output->writeln(sprintf('Downloaded <info>%s</info> to <info>%s</info>', $graphUrl, $filename));
-    }
-
-    /**
-     * @param string $graphUrl
-     * @param string $filename
-     */
-    protected function downloadImage($graphUrl, $filename)
-    {
-        $curl = curl_init($graphUrl);
-        $file = fopen($filename, 'w+');
-
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => $graphUrl,
-            CURLOPT_BINARYTRANSFER => 1,
-            CURLOPT_RETURNTRANSFER => 1,
-            CURLOPT_FILE => $file,
-        ));
-
-        $response = curl_exec($curl);
-
-        if ($response === false) {
-            throw new \Exception(curl_error($curl));
-        }
     }
 }

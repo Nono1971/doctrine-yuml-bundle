@@ -56,6 +56,18 @@ class YumlClient
     }
 
     /**
+     * @param string $graphUrl
+     * @param string $filename
+     */
+    public function downloadImage($graphUrl, $filename)
+    {
+        $curl = new Curl($graphUrl);
+        $curl->setOutput($filename);
+
+        return $curl->getResponse();
+    }
+
+    /**
      * @return array
      */
     private function getMetadata()
