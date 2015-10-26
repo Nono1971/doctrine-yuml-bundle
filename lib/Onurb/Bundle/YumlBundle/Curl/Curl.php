@@ -17,6 +17,7 @@ class Curl
 
         curl_setopt($this->curl, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($this->curl, CURLOPT_TIMEOUT, 15);
+        curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, true);
     }
 
     /**
@@ -29,12 +30,25 @@ class Curl
     }
 
     /**
+     * Write the response to a file
+     *
+     * @param string $filename
+     */
+    public function setOutput($filename)
+    {
+        curl_setopt($this->curl, CURLOPT_FILE, fopen($filename, 'w+'));
+    }
+
+    /**
      * @return mixed
      */
     public function getResponse()
     {
-        curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, true);
         $return = curl_exec($this->curl);
+        if ($return === false) {
+            throw new \Exception(curl_error($this->curl));
+        }
+
         curl_close($this->curl);
         $this->curl = null;
 
