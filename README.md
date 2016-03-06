@@ -16,7 +16,7 @@ Installing this bundle can be done through these simple steps:
         // ...
         require: {
             // ...
-            "onurb/doctrine-yuml-bundle": "dev-master"
+            "onurb/doctrine-yuml-bundle": "~1.0"
         }
     }
 ```
