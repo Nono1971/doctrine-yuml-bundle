@@ -5,7 +5,7 @@ namespace Onurb\Bundle\YumlBundle\Yuml;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadataFactory;
 use Doctrine\ORM\Mapping\ClassMetadata;
-use Onurb\Bundle\YumlBundle\MetadataGrapher\MetadataGrapher;
+use Doctrine\ORM\MetadataGrapher\YUMLMetadataGrapher as MetadataGrapher;
 use Onurb\Bundle\YumlBundle\Curl\Curl;
 
 /**
@@ -85,7 +85,7 @@ class YumlClient
     {
         $classes = array();
         /*
-         * @var ClassMetadata
+         * @var ClassMetadata $class
          */
         foreach ($this->getMetadata() as $class) {
             $classes[$class->getName()] = $class;

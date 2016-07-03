@@ -4,13 +4,6 @@ namespace Onurb\Bundle\YumlBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use Doctrine\ORM\Mapping\ClassMetadataFactory;
-use Doctrine\ORM\Mapping\ClassMetadata;
-
-use Onurb\Bundle\YumlBundle\MetadataGrapher\MetadataGrapher;
-use Onurb\Bundle\YumlBundle\Curl\Curl;
-
-
 /**
  * Utility to generate Yuml compatible strings from metadata graphs
  * Adaptation of DoctrineORMModule\Yuml\YumlController for ZendFramework-Zend-Developer-Tools
