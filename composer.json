@@ -1,6 +1,6 @@
 {
     "name":                 "onurb/doctrine-yuml-bundle",
-    "description":          "Symfony2 Bundle to view Doctrine mapping with Yuml",
+    "description":          "Symfony3 Bundle to view Doctrine mapping with Yuml",
     "keywords":             ["yuml", "mapping", "doctrine", "diagram","graph", "uml","bundle","symfony"],
     "type":                 "symfony-bundle",
     "license":              "MIT",
@@ -28,6 +28,10 @@
         "doctrine/common":                  "~2.0",
         "doctrine/orm":                     "~2.0",
         "onurb/doctrine-metadata-grapher":  "~1.0"
+    },
+    "require-dev": {
+      "symfony/symfony": "~3.0",
+      "phpunit/phpunit": "~4.0"
     },
     "autoload": {
         "psr-4": { "Onurb\\Bundle\\YumlBundle\\": "lib/Onurb/Bundle/YumlBundle/" }

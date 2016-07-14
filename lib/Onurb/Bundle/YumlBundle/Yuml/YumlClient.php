@@ -5,7 +5,7 @@ namespace Onurb\Bundle\YumlBundle\Yuml;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadataFactory;
 use Doctrine\ORM\Mapping\ClassMetadata;
-use Doctrine\ORM\MetadataGrapher\YUMLMetadataGrapher as MetadataGrapher;
+use Onurb\Doctrine\ORMMetadataGrapher\YUMLMetadataGrapher as MetadataGrapher;
 use Onurb\Bundle\YumlBundle\Curl\Curl;
 
 /**
