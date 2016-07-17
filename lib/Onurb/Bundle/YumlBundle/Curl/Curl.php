@@ -8,7 +8,7 @@ class Curl implements CurlInterface
 
     /**
      * @param string $url
-     * @param string $curl to inject an external curl_id (returned by curl_init)... for testing or whatever
+     * @param resource $curl to inject an external curl_id (returned by curl_init)... for testing or whatever
      */
     public function __construct($url, $curl = null)
     {
