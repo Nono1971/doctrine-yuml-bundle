@@ -1,0 +1,22 @@
+framework:
+    secret:          secret
+#    charset:         UTF-8
+    test: ~
+    router:          { resource: "%kernel.root_dir%/routing.yml" }
+    form:            true
+    csrf_protection: true
+    validation:      { enable_annotations: true }
+    templating:      { engines: ['twig'] }
+    session:
+        storage_id:     session.storage.filesystem
+
+monolog:
+    handlers:
+        main:
+            type:         fingers_crossed
+            action_level: error
+            handler:      nested
+        nested:
+            type:  stream
+            path:  %kernel.logs_dir%/%kernel.environment%.log
+            level: debug

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <phpunit
-        bootstrap="./vendor/autoload.php"
+        bootstrap="./tests/Bootstrap.php"
         colors="true"
         convertErrorsToExceptions="true"
         convertNoticesToExceptions="true"
@@ -8,8 +8,11 @@
         verbose="true"
         stopOnFailure="false"
         syntaxCheck="true" >
-    <testsuite name="YumlMetadataGrapher tests">
-        <directory>./tests/</directory>
+    <php>
+        <server name="KERNEL_DIR" value="tests/Controller/App"/>
+    </php>
+    <testsuite name="Yuml Bundle tests">
+        <directory suffix="Test.php">./tests/OnurbTest/</directory>
     </testsuite>
     <filter>
         <whitelist addUncoveredFilesFromWhitelist="true">

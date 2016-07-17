@@ -2,17 +2,17 @@
 
 namespace Onurb\Bundle\YumlBundle\Curl;
 
-
-class Curl
+class Curl implements CurlInterface
 {
     private $curl;
 
     /**
      * @param string $url
+     * @param string $curl to inject an external curl_id (returned by curl_init)... for testing or whatever
      */
-    public function __construct($url)
+    public function __construct($url, $curl = null)
     {
-        $this->curl = curl_init();
+        $this->curl = $curl? $curl: curl_init();
         curl_setopt($this->curl, CURLOPT_URL, $url);
 
         curl_setopt($this->curl, CURLOPT_SSL_VERIFYPEER, false);
@@ -23,7 +23,7 @@ class Curl
     /**
      * @param array $posts
      */
-    public function setPosts($posts)
+    public function setPosts(array $posts)
     {
         curl_setopt($this->curl, CURLOPT_POST, count($posts));
         curl_setopt($this->curl, CURLOPT_POSTFIELDS, $this->formatCurlPostsString($posts));
@@ -59,9 +59,10 @@ class Curl
      * @param array $posts
      * @return string
      */
-    private function formatCurlPostsString($posts){
+    private function formatCurlPostsString(array $posts)
+    {
         $tmp = array();
-        foreach($posts as $key => $post){
+        foreach ($posts as $key => $post) {
             $tmp[] = $this->formatCurlPostItem($key, $post);
         }
         return implode('&', $tmp);
@@ -72,7 +73,8 @@ class Curl
      * @param string $value
      * @return string
      */
-    private function formatCurlPostItem($key, $value){
+    private function formatCurlPostItem($key, $value)
+    {
         return $key . '=' . urlencode($value);
     }
 }

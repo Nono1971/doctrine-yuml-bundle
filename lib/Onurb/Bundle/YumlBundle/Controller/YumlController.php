@@ -2,6 +2,7 @@
 
 namespace Onurb\Bundle\YumlBundle\Controller;
 
+use Onurb\Bundle\YumlBundle\Yuml\YumlClient;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
@@ -17,7 +18,8 @@ class YumlController extends Controller
 {
     public function indexAction()
     {
-        $yumlClient = $this->get('onurb.doctrine_yuml.client');
+        $yumlClient = $this->container->get('onurb.doctrine_yuml.client');
+        $this->setContainer();
 
         return $this->redirect($yumlClient->getGraphUrl($yumlClient->makeDslText()));
     }

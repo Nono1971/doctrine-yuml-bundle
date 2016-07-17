@@ -4,9 +4,11 @@ namespace Onurb\Bundle\YumlBundle\Yuml;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadataFactory;
-use Doctrine\ORM\Mapping\ClassMetadata;
-use Onurb\Doctrine\ORMMetadataGrapher\YUMLMetadataGrapher as MetadataGrapher;
+use Doctrine\Common\Persistence\Mapping\ClassMetadataFactory as ClassMetadataFactoryInterface;
 use Onurb\Bundle\YumlBundle\Curl\Curl;
+use Onurb\Bundle\YumlBundle\Curl\CurlInterface;
+use Onurb\Doctrine\ORMMetadataGrapher\YUMLMetadataGrapher as MetadataGrapher;
+use Onurb\Doctrine\ORMMetadataGrapher\YUMLMetadataGrapherInterface as MetadataGrapherInterface;
 
 /**
  * Utility to generate Yuml compatible strings from metadata graphs
@@ -17,16 +19,33 @@ use Onurb\Bundle\YumlBundle\Curl\Curl;
  * @author  Marco Pivetta <ocramius@gmail.com>
  * @author  Bruno Heron <herobrun@gmail.com>
  **/
-class YumlClient
+class YumlClient implements YumlClientInterface
 {
     const YUML_POST_URL = 'http://yuml.me/diagram/plain/class';
     const YUML_REDIRECT_URL = 'http://yuml.me/';
 
     protected $entityManager;
 
-    public function __construct(EntityManagerInterface $entityManager)
-    {
+    protected $metadataFactory;
+
+    protected $metadataGrapher;
+
+    /**
+     * @param EntityManagerInterface $entityManager
+     * @param ClassMetadataFactoryInterface|null $classMetadataFactory
+     * @param MetadataGrapherInterface|null $metadataGrapher
+     */
+    public function __construct(
+        EntityManagerInterface          $entityManager,
+        ClassMetadataFactoryInterface   $classMetadataFactory = null,
+        MetadataGrapherInterface        $metadataGrapher = null
+    ) {
         $this->entityManager = $entityManager;
+
+        $this->metadataFactory = $classMetadataFactory? $classMetadataFactory: new ClassMetadataFactory();
+        $this->metadataFactory->setEntityManager($this->entityManager);
+
+        $this->metadataGrapher = $metadataGrapher? $metadataGrapher: new MetadataGrapher();
     }
 
     /**
@@ -58,10 +77,11 @@ class YumlClient
     /**
      * @param string $graphUrl
      * @param string $filename
+     * @return mixed
      */
-    public function downloadImage($graphUrl, $filename)
+    public function downloadImage($graphUrl, $filename, CurlInterface $curl = null)
     {
-        $curl = new Curl($graphUrl);
+        $curl = $curl? $curl: new Curl($graphUrl);
         $curl->setOutput($filename);
 
         return $curl->getResponse();
@@ -72,10 +92,7 @@ class YumlClient
      */
     private function getMetadata()
     {
-        $metadataFactory = new ClassMetadataFactory();
-        $metadataFactory->setEntityManager($this->entityManager);
-
-        return $metadataFactory->getAllMetadata();
+        return $this->metadataFactory->getAllMetadata();
     }
 
     /**
@@ -84,9 +101,6 @@ class YumlClient
     private function getClasses()
     {
         $classes = array();
-        /*
-         * @var ClassMetadata $class
-         */
         foreach ($this->getMetadata() as $class) {
             $classes[$class->getName()] = $class;
         }
@@ -102,8 +116,7 @@ class YumlClient
      */
     private function generateGraph($classes)
     {
-        $metagrapher = new MetadataGrapher();
-        $graph = $metagrapher->generateFromMetadata($classes);
+        $graph = $this->metadataGrapher->generateFromMetadata($classes);
 
         return $graph;
     }
