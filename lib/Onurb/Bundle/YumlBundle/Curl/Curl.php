@@ -26,7 +26,7 @@ class Curl implements CurlInterface
     public function setPosts(array $posts)
     {
         curl_setopt($this->curl, CURLOPT_POST, count($posts));
-        curl_setopt($this->curl, CURLOPT_POSTFIELDS, $this->formatCurlPostsString($posts));
+        curl_setopt($this->curl, CURLOPT_POSTFIELDS, http_build_query($posts));
     }
 
     /**
@@ -41,6 +41,7 @@ class Curl implements CurlInterface
 
     /**
      * @return mixed
+     * @throws \Exception
      */
     public function getResponse()
     {
@@ -53,28 +54,5 @@ class Curl implements CurlInterface
         $this->curl = null;
 
         return $return;
-    }
-
-    /**
-     * @param array $posts
-     * @return string
-     */
-    private function formatCurlPostsString(array $posts)
-    {
-        $tmp = array();
-        foreach ($posts as $key => $post) {
-            $tmp[] = $this->formatCurlPostItem($key, $post);
-        }
-        return implode('&', $tmp);
-    }
-
-    /**
-     * @param string $key
-     * @param string $value
-     * @return string
-     */
-    private function formatCurlPostItem($key, $value)
-    {
-        return $key . '=' . urlencode($value);
     }
 }

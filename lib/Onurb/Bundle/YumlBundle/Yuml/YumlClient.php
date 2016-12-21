@@ -2,6 +2,7 @@
 
 namespace Onurb\Bundle\YumlBundle\Yuml;
 
+use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadataFactory;
 use Doctrine\Common\Persistence\Mapping\ClassMetadataFactory as ClassMetadataFactoryInterface;
@@ -21,8 +22,8 @@ use Onurb\Doctrine\ORMMetadataGrapher\YUMLMetadataGrapherInterface as MetadataGr
  **/
 class YumlClient implements YumlClientInterface
 {
-    const YUML_POST_URL = 'http://yuml.me/diagram/plain/class';
-    const YUML_REDIRECT_URL = 'http://yuml.me/';
+    const YUML_POST_URL = 'https://yuml.me/diagram/plain/class';
+    const YUML_REDIRECT_URL = 'https://yuml.me/';
 
     protected $entityManager;
 
@@ -101,6 +102,7 @@ class YumlClient implements YumlClientInterface
     private function getClasses()
     {
         $classes = array();
+        /** @var ClassMetadata $class */
         foreach ($this->getMetadata() as $class) {
             $classes[$class->getName()] = $class;
         }

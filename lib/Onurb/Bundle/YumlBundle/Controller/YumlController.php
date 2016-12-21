@@ -18,6 +18,7 @@ class YumlController extends Controller
 {
     public function indexAction()
     {
+        /** @var YumlClient $yumlClient */
         $yumlClient = $this->container->get('onurb.doctrine_yuml.client');
         $this->setContainer();
 

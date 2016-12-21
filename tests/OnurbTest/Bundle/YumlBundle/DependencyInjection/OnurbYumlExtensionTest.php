@@ -11,7 +11,7 @@ class OnurbYumlExtensionTest extends \PHPUnit_Framework_TestCase
      */
     public function testIsInstanceOf()
     {
-        $onurbYumeExtension = new OnurbYumlExtension();
-        $this->assertInstanceOf("Symfony\\Component\\HttpKernel\\DependencyInjection\\Extension", $onurbYumeExtension);
+        $onurbYumlExtension = new OnurbYumlExtension();
+        $this->assertInstanceOf("Symfony\\Component\\HttpKernel\\DependencyInjection\\Extension", $onurbYumlExtension);
     }
 }

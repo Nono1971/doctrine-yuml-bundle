@@ -37,7 +37,7 @@ class CurlTest extends \PHPUnit_Framework_TestCase
      */
     public function testResponseWithCorrectUrl()
     {
-        $testUrl = 'http://yuml.me';
+        $testUrl = 'https://yuml.me';
         $curl = new Curl($testUrl);
 
         $response = $curl->getResponse();
@@ -49,7 +49,7 @@ class CurlTest extends \PHPUnit_Framework_TestCase
      */
     public function testResponseWithPostData()
     {
-        $testUrl = 'http://yuml.me/diagram/plain/class';
+        $testUrl = 'https://yuml.me/diagram/plain/class';
         $curl = new Curl($testUrl);
 
         $posts = array(
@@ -66,7 +66,7 @@ class CurlTest extends \PHPUnit_Framework_TestCase
      */
     public function testDowloadFile()
     {
-        $fileUrl = 'http://yuml.me/15a98c92.png';
+        $fileUrl = 'https://yuml.me/15a98c92.png';
         $fileName = 'test.png';
 
         $this->assertFalse(file_exists($fileName));

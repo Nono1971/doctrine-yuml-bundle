@@ -96,7 +96,7 @@ class YumlClientTest extends \PHPUnit_Framework_TestCase
 
         $client = new YumlClient($entityManager);
 
-        $this->assertSame('http://yuml.me/15a98c92.png', $client->getGraphUrl('[Simple.Entity|+a;b;c]'));
+        $this->assertSame('https://yuml.me/15a98c92.png', $client->getGraphUrl('[Simple.Entity|+a;b;c]'));
     }
 
     /**
