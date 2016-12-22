@@ -12,7 +12,7 @@ class Curl implements CurlInterface
      */
     public function __construct($url, $curl = null)
     {
-        $this->curl = $curl? $curl: curl_init();
+        $this->curl = $curl ? $curl : curl_init();
         curl_setopt($this->curl, CURLOPT_URL, $url);
 
         curl_setopt($this->curl, CURLOPT_SSL_VERIFYPEER, false);

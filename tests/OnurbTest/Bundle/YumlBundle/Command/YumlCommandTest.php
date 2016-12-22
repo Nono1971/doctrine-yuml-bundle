@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class YumlCommandTest extends \PHPUnit_Framework_TestCase
 {
-    const YUML_LINK  = 'https://yuml.me/15a98c92.png';
+    const YUML_LINK = 'https://yuml.me/15a98c92.png';
 
     /**
      * @var Application
@@ -56,7 +56,6 @@ class YumlCommandTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue($yumlClient));
 
         $this->command->setContainer($this->container);
-
     }
 
     /**
@@ -67,23 +66,5 @@ class YumlCommandTest extends \PHPUnit_Framework_TestCase
         $this->commandTester->execute(array('command' => $this->command->getName()));
         $this->assertRegExp('/.../', $this->commandTester->getDisplay());
         $this->assertSame('Downloaded', explode(' ', $this->commandTester->getDisplay())[0]);
-    }
-
-    /**
-     * @covers \Onurb\Bundle\YumlBundle\Command\YumlCommand
-     */
-    public function testExecuteWithFilenameOption()
-    {
-        $filename = 'testFilename.png';
-        $this->commandTester->execute(
-            array(
-                'command' => $this->command->getName(),
-                '--filename' => $filename
-            )
-        );
-        $this->assertSame(
-            'Downloaded ' . self::YUML_LINK . ' to '. $filename,
-            explode("\r\n",$this->commandTester->getDisplay())[0]
-        );
     }
 }

@@ -42,11 +42,9 @@ class YumlClient implements YumlClientInterface
         MetadataGrapherInterface        $metadataGrapher = null
     ) {
         $this->entityManager = $entityManager;
-
-        $this->metadataFactory = $classMetadataFactory? $classMetadataFactory: new ClassMetadataFactory();
+        $this->metadataFactory = $classMetadataFactory ? $classMetadataFactory : new ClassMetadataFactory();
         $this->metadataFactory->setEntityManager($this->entityManager);
-
-        $this->metadataGrapher = $metadataGrapher? $metadataGrapher: new MetadataGrapher();
+        $this->metadataGrapher = $metadataGrapher ? $metadataGrapher : new MetadataGrapher();
     }
 
     /**
@@ -72,7 +70,7 @@ class YumlClient implements YumlClientInterface
         $curl->setPosts(array('dsl_text' => $dsl_text));
         $return = $curl->getResponse();
 
-        return self::YUML_REDIRECT_URL.$return;
+        return self::YUML_REDIRECT_URL . $return;
     }
 
     /**
@@ -82,7 +80,7 @@ class YumlClient implements YumlClientInterface
      */
     public function downloadImage($graphUrl, $filename, CurlInterface $curl = null)
     {
-        $curl = $curl? $curl: new Curl($graphUrl);
+        $curl = $curl ? $curl : new Curl($graphUrl);
         $curl->setOutput($filename);
 
         return $curl->getResponse();
