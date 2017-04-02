@@ -19,9 +19,19 @@ class YumlController extends Controller
     public function indexAction()
     {
         /** @var YumlClient $yumlClient */
-        $yumlClient = $this->container->get('onurb.doctrine_yuml.client');
-        $this->setContainer();
+        $yumlClient = $this->container->get('onurb_yuml.client');
 
-        return $this->redirect($yumlClient->getGraphUrl($yumlClient->makeDslText()));
+        $showDetailParam = $this->container->getParameter('onurb_yuml.show_fields_description');
+        $colorsParam = $this->container->getParameter('onurb_yuml.colors');
+        $notesParam = $this->container->getParameter('onurb_yuml.notes');
+
+
+        //$this->setContainer();
+
+        return $this->redirect(
+            $yumlClient->getGraphUrl(
+                $yumlClient->makeDslText($showDetailParam, $colorsParam, $notesParam)
+            )
+        );
     }
 }

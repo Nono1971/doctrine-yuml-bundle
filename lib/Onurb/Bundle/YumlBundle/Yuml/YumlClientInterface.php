@@ -37,9 +37,12 @@ interface YumlClientInterface
     /**
      * Get doctrine metadata as yuml.
      *
+     * @param bool $showDetail
+     * @param array $colors
+     * @param array $notes
      * @return string The string from metadata, prepare for yuml API
      */
-    public function makeDslText();
+    public function makeDslText($showDetail = false, $colors = array(), $notes = array());
 
     /**
      * Use yuml.me to generate an image from yuml.

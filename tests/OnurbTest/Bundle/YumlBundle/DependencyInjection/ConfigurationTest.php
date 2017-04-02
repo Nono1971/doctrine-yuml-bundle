@@ -18,7 +18,7 @@ class ConfigutationTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Onurb\Bundle\YumlBundle\DependencyInjection\Configuration
      */
-    public function testGetConfigBuilder()
+    public function testGetConfigBuilderInstanceOf()
     {
         $configuration = new Configuration();
         $return = $configuration->getConfigTreeBuilder();

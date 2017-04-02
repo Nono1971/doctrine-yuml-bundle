@@ -20,7 +20,22 @@ class OnurbYumlExtension extends Extension
     public function load(array $configs, ContainerBuilder $container)
     {
         $configuration = new Configuration();
-        $this->processConfiguration($configuration, $configs);
+        $configs = $this->processConfiguration($configuration, $configs);
+
+        $container->setParameter(
+            'onurb_yuml.show_fields_description',
+            $configs['yuml_show_fields_description']
+        );
+
+        $container->setParameter(
+            'onurb_yuml.colors',
+            $configs['yuml_colors']
+        );
+
+        $container->setParameter(
+            'onurb_yuml.notes',
+            $configs['yuml_notes']
+        );
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');

@@ -1,10 +1,10 @@
 services:
-    onurb.doctrine_yuml.toolbar:
+    onurb_yuml.toolbar:
         class: Onurb\Bundle\YumlBundle\DataCollector\DoctrineYumlDataCollector
         arguments: []
         tags:
             - { name: data_collector, template: OnurbYumlBundle:Toolbar:toolbar.html.twig, id: "doctrine_yuml" }
-    onurb.doctrine_yuml.client:
+    onurb_yuml.client:
         class: Onurb\Bundle\YumlBundle\Yuml\YumlClient
         arguments:
             - "@doctrine.orm.entity_manager"

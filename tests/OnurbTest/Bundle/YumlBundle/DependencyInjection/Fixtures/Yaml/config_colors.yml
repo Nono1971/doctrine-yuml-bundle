@@ -1,0 +1,4 @@
+parameters:
+    onurb_yuml.colors:
+         My\Class: green
+         My\OtherClass: blue

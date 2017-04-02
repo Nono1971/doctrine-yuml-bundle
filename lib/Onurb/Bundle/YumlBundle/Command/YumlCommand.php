@@ -30,10 +30,15 @@ class YumlCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $yumlClient = $this->getContainer()->get('onurb.doctrine_yuml.client');
+        $yumlClient = $this->getContainer()->get('onurb_yuml.client');
         $filename = $input->getOption('filename');
 
-        $graphUrl = $yumlClient->getGraphUrl($yumlClient->makeDslText());
+        $showDetailParam = $this->getContainer()->getParameter('onurb_yuml.show_fields_description');
+        $colorsParam = $this->getContainer()->getParameter('onurb_yuml.colors');
+        $notesParam = $this->getContainer()->getParameter('onurb_yuml.notes');
+
+
+        $graphUrl = $yumlClient->getGraphUrl($yumlClient->makeDslText($showDetailParam, $colorsParam, $notesParam));
         $yumlClient->downloadImage($graphUrl, $filename);
 
         $output->writeln(sprintf('Downloaded <info>%s</info> to <info>%s</info>', $graphUrl, $filename));

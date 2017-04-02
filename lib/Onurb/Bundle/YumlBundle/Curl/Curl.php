@@ -26,7 +26,7 @@ class Curl implements CurlInterface
     public function setPosts(array $posts)
     {
         curl_setopt($this->curl, CURLOPT_POST, count($posts));
-        curl_setopt($this->curl, CURLOPT_POSTFIELDS, http_build_query($posts));
+        curl_setopt($this->curl, CURLOPT_POSTFIELDS, http_build_query(array_map("utf8_encode", $posts)));
     }
 
     /**

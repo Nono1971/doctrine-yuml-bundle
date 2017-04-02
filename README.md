@@ -39,8 +39,7 @@ Installing this bundle can be done through these simple steps:
     }
 ```
 
-- Add this route in your global routing_dev configuration
-    of course, you can add a prefix if you want
+- Add this route in your global routing_dev configuration (with optional prefix)
 ```yml
     # app/config/routing_dev.yml
 
@@ -56,3 +55,128 @@ configure access to the yuml route (if you use security of course)
 Click on Doctrine icon added in the dev toolbar.
 
 Run the `yuml:mappings` console command to save the image locally.
+
+
+# New Features
+Full personalisation for mapping rendering defining parameters or using Metadatagrapher annotations
+[![Colored Map with note](http://yuml.me/23e34ac0)](http://yuml.me/23e34ac0)
+
+## Display entities attributes properties (unique, type, length, ...)
+Use the parameter file :
+```yml
+     # app/config/parameters.yml
+
+     # ...
+    parameters:
+        onurb_yuml.show_fields_description: true
+```
+this parameter is set to false by default
+
+##### Warning : don't forget to also define parameter keys in parameters.yml.dist to avoid symfony update to clear your parameters
+
+### Toggle attributes properties on a specific class using annotations
+to show only desired classes details :
+```php
+    namespace My\Bundle\Entity
+
+    use Onurb\Doctrine\ORMMetadataGrapher\Mapping as Grapher;
+
+    /**
+    * @Grapher\ShowAttributesProperties()
+    */
+    Class MyClass
+    {
+        // ...
+    }
+```
+
+And if display is set to true in your parameters, you can hide specific classes details :
+```php
+    namespace My\Bundle\Entity
+
+    use Onurb\Doctrine\ORMMetadataGrapher\Mapping as Grapher;
+
+    /**
+    * @Grapher\HideAttributesProperties()
+    */
+    Class MyClass
+    {
+        // ...
+    }
+```
+
+## Define colors for entities rendering
+### Define default color for a complete bundle by defining it in parameters.yml
+```yml
+     # app/config/parameters.yml
+
+     # ...
+    parameters:
+        onurb_yuml.colors:
+            My\AppBundle: green
+            My\OtherBundle: red
+```
+
+You can also define colors for classes this way... but it is easier using annotations as described next
+
+Complete list of yuml colors availables [here](http://yuml.me/69f3a9ba.svg)
+                                       [![Color list](http://yuml.me/69f3a9ba.svg)](http://yuml.me/69f3a9ba.svg)
+
+### Define Entity color in graph using annotations
+```php
+    namespace My\Bundle\Entity
+
+    use Onurb\Doctrine\ORMMetadataGrapher\Mapping as Grapher;
+
+    /**
+    * @Grapher\Color("blue")
+    */
+    Class MyClass
+    {
+
+    }
+```
+
+## Display specific entity method
+You can display specific methods in the graph, using annotations
+```php
+    namespace My\Bundle\Entity
+
+    use Onurb\Doctrine\ORMMetadataGrapher\Mapping as Grapher;
+
+    // ...
+    Class MyEntity
+    {
+        // ...
+
+        /**
+         * @Grapher\IsDisplayedMethod()
+         */
+        public function myDisplayedMethod()
+        {
+            // ...
+        }
+    }
+```
+
+## Add notes to comment entities in the graph
+use annotations :
+```php
+    namespace My\Bundle\Entity
+
+    use Onurb\Doctrine\ORMMetadataGrapher\Mapping as Grapher;
+
+    /**
+    * @Grapher\Note("Some information about this class")
+    */
+    Class MyClass
+    {
+
+    }
+```
+Notes are yellow by default, but you can customize note's' color
+```php
+    /**
+    * @Grapher\Note(value="Some information about this class", color="blue")
+    */
+```

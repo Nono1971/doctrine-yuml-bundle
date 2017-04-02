@@ -47,14 +47,23 @@ class YumlClient implements YumlClientInterface
         $this->metadataGrapher = $metadataGrapher ? $metadataGrapher : new MetadataGrapher();
     }
 
+
     /**
      * Get doctrine metadata as yuml.
      *
+     * @param bool $showDetail
+     * @param array $colors
+     * @param array $notes
      * @return string
      */
-    public function makeDslText()
+    public function makeDslText($showDetail = false, $colors = array(), $notes = array())
     {
-        return $this->generateGraph($this->getClasses());
+        return $this->metadataGrapher->generateFromMetadata(
+            $this->getClasses(),
+            $showDetail,
+            $colors,
+            $notes
+        );
     }
 
     /**
@@ -107,17 +116,5 @@ class YumlClient implements YumlClientInterface
         ksort($classes);
 
         return $classes;
-    }
-
-    /**
-     * @param $classes
-     *
-     * @return string
-     */
-    private function generateGraph($classes)
-    {
-        $graph = $this->metadataGrapher->generateFromMetadata($classes);
-
-        return $graph;
     }
 }

@@ -62,7 +62,7 @@ class YumlClientTest extends \PHPUnit_Framework_TestCase
 
         $metadataFactory->expects($this->once())->method('setEntityManager');
 
-        $class = $class = $this->getMock('Doctrine\\Common\\Persistence\\Mapping\\ClassMetadata');
+        $class = $this->getMock('Doctrine\\Common\\Persistence\\Mapping\\ClassMetadata');
         $class->expects($this->any())->method('getName')->will($this->returnValue('Simple\\Entity'));
         $class->expects($this->any())->method('getFieldNames')->will($this->returnValue(array('a', 'b', 'c')));
         $class->expects($this->any())->method('getAssociationNames')->will($this->returnValue(array()));

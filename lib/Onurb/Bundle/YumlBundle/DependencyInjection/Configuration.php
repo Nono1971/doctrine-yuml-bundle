@@ -19,7 +19,28 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $treeBuilder->root('doctrine_yuml');
+        $rootNode = $treeBuilder->root('onurb_yuml');
+
+        $rootNode
+            ->children()
+                ->booleanNode('yuml_show_fields_description')
+                    ->info('Set true to show fields properties in graph')
+                    ->defaultFalse()
+                ->end()
+                ->arrayNode('yuml_colors')
+                    ->prototype('array')
+                        ->children()
+                        ->end()
+                    ->end()
+                ->end()
+                ->arrayNode('yuml_notes')
+                    ->prototype('array')
+                        ->children()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end();
+
         return $treeBuilder;
     }
 }
