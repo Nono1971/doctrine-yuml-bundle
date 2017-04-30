@@ -66,8 +66,8 @@ Use the parameter file :
 ```yml
      # app/config/parameters.yml
 
-     # ...
     parameters:
+        # ...
         onurb_yuml.show_fields_description: true
 ```
 this parameter is set to false by default
@@ -110,8 +110,8 @@ And if display is set to true in your parameters, you can hide specific classes 
 ```yml
      # app/config/parameters.yml
 
-     # ...
     parameters:
+        # ...
         onurb_yuml.colors:
             My\AppBundle: green
             My\OtherBundle: red
