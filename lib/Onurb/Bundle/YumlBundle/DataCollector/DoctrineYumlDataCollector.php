@@ -16,4 +16,9 @@ class DoctrineYumlDataCollector extends DataCollector
     {
         return 'doctrine_yuml';
     }
+    
+    public function reset()
+    {
+        $this->data = array();
+    }
 }
