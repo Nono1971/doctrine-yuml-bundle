@@ -2,8 +2,9 @@
 namespace OnurbTest\Bundle\YumlBundle\DependencyInjection;
 
 use Onurb\Bundle\YumlBundle\DependencyInjection\Configuration;
+use PHPUnit\Framework\TestCase;
 
-class ConfigutationTest extends \PHPUnit_Framework_TestCase
+class ConfigutationTest extends TestCase
 {
 
     /**

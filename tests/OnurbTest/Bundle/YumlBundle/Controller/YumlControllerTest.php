@@ -3,10 +3,11 @@
 namespace OnurbTest\Bundle\YumlBundle\Controller;
 
 use Onurb\Bundle\YumlBundle\Controller\YumlController;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
-class YumlControllerTest extends \PHPUnit_Framework_TestCase
+class YumlControllerTest extends TestCase
 {
 
     /**
@@ -24,7 +25,7 @@ class YumlControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testIndexAction()
     {
-        $yumlClient = $this->getMock('Onurb\\Bundle\\YumlBundle\\Yuml\\YumlClientInterface');
+        $yumlClient = $this->createMock('Onurb\\Bundle\\YumlBundle\\Yuml\\YumlClientInterface');
 
         $yumlClient->expects($this->once())
             ->method('makeDslText')
@@ -34,11 +35,11 @@ class YumlControllerTest extends \PHPUnit_Framework_TestCase
             ->method('getGraphUrl')
             ->will($this->returnValue('http://yuml.me/15a98c92.png'));
 
-        $this->container = $this->getMock('Symfony\\Component\\DependencyInjection\\ContainerInterface');
-
-        $this->container->expects($this->any())->method('get')
-            ->with($this->matches('onurb_yuml.client'))
-            ->will($this->returnValue($yumlClient));
+        $this->container = $this->createMock('Symfony\\Component\\DependencyInjection\\ContainerInterface');
+//
+//        $this->container->expects($this->any())->method('get')
+//            ->with($this->matches('onurb_yuml.client'))
+//            ->will($this->returnValue($yumlClient));
 
         $this->container->expects($this->any())->method('getParameter')
             ->will(
@@ -59,7 +60,7 @@ class YumlControllerTest extends \PHPUnit_Framework_TestCase
 
         $controller = $this->createController();
 
-        $response = $controller->indexAction();
+        $response = $controller->indexAction($yumlClient);
 
         //On teste si la réponse est bien une redirection.
         $this->assertTrue($response instanceof RedirectResponse);

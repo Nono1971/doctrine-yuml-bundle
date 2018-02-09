@@ -1,18 +1,18 @@
 {
     "name":                 "onurb/doctrine-yuml-bundle",
-    "description":          "Symfony3 Bundle to view Doctrine mapping with Yuml",
-    "keywords":             ["yuml", "mapping", "doctrine", "diagram","graph", "uml","bundle","symfony"],
+    "description":          "Symfony Bundle to visualize the mapping of your entities with Yuml",
+    "keywords":             ["yuml", "mapping", "doctrine", "diagram", "graph", "uml", "bundle", "symfony"],
     "type":                 "symfony-bundle",
     "license":              "MIT",
     "minimum-stability":    "dev",
     "authors": [
         {
-            "name":     "Marco Pivetta",
-            "email":    "ocramius@gmail.com"
-        },
-        {
             "name":     "Bruno Heron",
             "email":    "herobrun@gmail.com"
+        },
+        {
+            "name":     "Marco Pivetta",
+            "email":    "ocramius@gmail.com"
         },
         {
             "name":     "Symfony Community",
@@ -30,16 +30,18 @@
         "onurb/doctrine-metadata-grapher":  "~1.0"
     },
     "require-dev": {
-      "symfony/symfony":                                  "~3.0",
-      "symfony/monolog-bundle":                           "^2.8",
-      "sensio/framework-extra-bundle":                    "^3.0.2",
-      "sensio/generator-bundle":                          "^3.0",
-      "symfony/phpunit-bridge":                           "^3.0",
-      "squizlabs/php_codesniffer":                        "~2",
-      "doctrine/doctrine-bundle":                         "~1.5",
-      "phpunit/phpunit":                                  "~4.0"
+      "php":                            ">7.0",
+      "symfony/symfony":                "~3.0|~4.0",
+      "squizlabs/php_codesniffer":      "~2",
+      "doctrine/doctrine-bundle":       "^1.5",
+      "phpunit/phpunit":                "~6.5"
     },
     "autoload": {
       "psr-4":    { "Onurb\\Bundle\\YumlBundle\\":"lib/Onurb/Bundle/YumlBundle/" }
+    },
+    "extra": {
+        "symfony": {
+            "allow-contrib": "true"
+        }
     }
 }

@@ -56,5 +56,8 @@ if ($coverage < $percentage) {
     echo 'Code coverage is ' . $coverage . '%, which is below the accepted ' . $percentage . '%' . PHP_EOL;
     exit(1);
 }
-
-echo 'Code coverage is ' . $coverage . '% - OK!' . PHP_EOL;
+if ($coverage == 100) {
+    echo 'Perfect !! Code coverage is ' . $coverage . '% !' . PHP_EOL;
+} else {
+    echo 'Code coverage is ' . $coverage . '% - OK!' . PHP_EOL;
+}

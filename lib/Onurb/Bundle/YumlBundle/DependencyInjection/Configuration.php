@@ -25,7 +25,7 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->booleanNode('yuml_show_fields_description')
                     ->info('Set true to show fields properties in graph')
-                    ->defaultFalse()
+                    ->defaultTrue()
                 ->end()
                 ->arrayNode('yuml_colors')
                     ->prototype('array')

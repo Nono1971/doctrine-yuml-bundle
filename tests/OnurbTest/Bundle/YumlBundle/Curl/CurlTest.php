@@ -2,8 +2,9 @@
 namespace OnurbTest\Bundle\YumlBundle\Curl;
 
 use Onurb\Bundle\YumlBundle\Curl\Curl;
+use PHPUnit\Framework\TestCase;
 
-class CurlTest extends \PHPUnit_Framework_TestCase
+class CurlTest extends TestCase
 {
     /**
      * @covers \Onurb\Bundle\YumlBundle\Curl\Curl

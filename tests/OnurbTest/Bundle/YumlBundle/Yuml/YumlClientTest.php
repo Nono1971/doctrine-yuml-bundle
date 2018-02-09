@@ -1,14 +1,10 @@
 <?php
 namespace OnurbTest\Bundle\YumlBundle\Yuml;
 
-use Onurb\Bundle\YumlBundle\DataCollector\DoctrineYumlDataCollector;
 use Onurb\Bundle\YumlBundle\Yuml\YumlClient;
-use Onurb\Doctrine\ORMMetadataGrapher\YUMLMetadataGrapherInterface;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;
-use Doctrine\ORM\EntityManagerInterface;
+use PHPUnit\Framework\TestCase;
 
-class YumlClientTest extends \PHPUnit_Framework_TestCase
+class YumlClientTest extends TestCase
 {
 
     public function setUp()
@@ -21,7 +17,7 @@ class YumlClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testIsInstanceOf()
     {
-        $entityManager = $this->getMock("Doctrine\\ORM\\EntityManagerInterface");
+        $entityManager = $this->createMock("Doctrine\\ORM\\EntityManagerInterface");
         $metadataFactory = $this->getMockBuilder("Doctrine\\Common\\Persistence\\Mapping\\ClassMetadataFactory")
             ->setMethods(array(
                 'getAllMetadata',
@@ -47,7 +43,7 @@ class YumlClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetMetadata()
     {
-        $entityManager = $this->getMock("Doctrine\\ORM\\EntityManagerInterface");
+        $entityManager = $this->createMock("Doctrine\\ORM\\EntityManagerInterface");
 
         $metadataFactory = $this->getMockBuilder("Doctrine\\Common\\Persistence\\Mapping\\ClassMetadataFactory")
             ->setMethods(array(
@@ -62,7 +58,7 @@ class YumlClientTest extends \PHPUnit_Framework_TestCase
 
         $metadataFactory->expects($this->once())->method('setEntityManager');
 
-        $class = $this->getMock('Doctrine\\Common\\Persistence\\Mapping\\ClassMetadata');
+        $class = $this->createmock('Doctrine\\Common\\Persistence\\Mapping\\ClassMetadata');
         $class->expects($this->any())->method('getName')->will($this->returnValue('Simple\\Entity'));
         $class->expects($this->any())->method('getFieldNames')->will($this->returnValue(array('a', 'b', 'c')));
         $class->expects($this->any())->method('getAssociationNames')->will($this->returnValue(array()));
@@ -92,7 +88,7 @@ class YumlClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetGraphUrl()
     {
-        $entityManager = $this->getMock("Doctrine\\ORM\\EntityManagerInterface");
+        $entityManager = $this->createMock("Doctrine\\ORM\\EntityManagerInterface");
 
         $client = new YumlClient($entityManager);
 
@@ -105,7 +101,7 @@ class YumlClientTest extends \PHPUnit_Framework_TestCase
     public function testDownloadFile()
     {
         $filename = 'test.png';
-        $entityManager = $this->getMock("Doctrine\\ORM\\EntityManagerInterface");
+        $entityManager = $this->createMock("Doctrine\\ORM\\EntityManagerInterface");
 
         $client = new YumlClient($entityManager);
 

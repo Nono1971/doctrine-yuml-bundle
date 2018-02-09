@@ -17,8 +17,8 @@ use Onurb\Doctrine\ORMMetadataGrapher\YUMLMetadataGrapherInterface as MetadataGr
  *
  * @license MIT
  * @link    http://www.doctrine-project.org/
- * @author  Marco Pivetta <ocramius@gmail.com>
  * @author  Bruno Heron <herobrun@gmail.com>
+ * @author  Marco Pivetta <ocramius@gmail.com>
  **/
 interface YumlClientInterface
 {

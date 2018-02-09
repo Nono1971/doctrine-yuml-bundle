@@ -3,8 +3,7 @@ services:
         class: Onurb\Bundle\YumlBundle\DataCollector\DoctrineYumlDataCollector
         arguments: []
         tags:
-            - { name: data_collector, template: OnurbYumlBundle:Toolbar:toolbar.html.twig, id: "doctrine_yuml" }
-    onurb_yuml.client:
-        class: Onurb\Bundle\YumlBundle\Yuml\YumlClient
-        arguments:
-            - "@doctrine.orm.entity_manager"
+            -
+                name: data_collector
+                template: 'OnurbYumlBundle/Toolbar/toolbar.html.twig'
+                id: 'doctrine_yuml'

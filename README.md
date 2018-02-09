@@ -2,16 +2,24 @@
 
 [![Build Status](https://travis-ci.org/Nono1971/doctrine-yuml-bundle.svg?branch=master)](https://travis-ci.org/Nono1971/doctrine-yuml-bundle) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Nono1971/doctrine-yuml-bundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Nono1971/doctrine-yuml-bundle/?branch=master) [![Code Coverage](https://scrutinizer-ci.com/g/Nono1971/doctrine-yuml-bundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Nono1971/doctrine-yuml-bundle/?branch=master) [![Build Status](https://scrutinizer-ci.com/g/Nono1971/doctrine-yuml-bundle/badges/build.png?b=master)](https://scrutinizer-ci.com/g/Nono1971/doctrine-yuml-bundle/build-status/master) [![Latest Stable Version](https://poser.pugx.org/onurb/doctrine-yuml-bundle/v/stable)](https://packagist.org/packages/onurb/doctrine-yuml-bundle) [![Total Downloads](https://poser.pugx.org/onurb/doctrine-yuml-bundle/downloads)](https://packagist.org/packages/onurb/doctrine-yuml-bundle)
 
-Bundle to visualise doctrine entities graph with yuml in Symfony3 (or 2)
+Bundle to visualise doctrine entities graph with yuml in Symfony
+
+Compatible with SF4, SF3 or SF2
 
 This bundle is based on Marco Pivetta's work for zend doctrine ORM Module and zend developper tools
-It uses the yuml api to display your project's objects mapping.
+
+It uses the yuml.me api to display your project's objects mapping.
 
 
 ## Installation
+### Symfony 4
 
-Installing this bundle can be done through these simple steps:
+  Run the `composer require onurb/doctrine-yuml-bundle` command in your console
 
+  Adjust your parameters in config/packages/dev/yuml.yaml
+  Adjust the route (if you want to add a prefix) in config/routes/dev/yuml.yaml
+
+### Symfony 3 or 2
 - Add this bundle to your project as a composer dependency:
 ```javascript
     // composer.json
@@ -54,28 +62,26 @@ configure access to the yuml route (if you use security of course)
 ## Use
 Click on Doctrine icon added in the dev toolbar.
 
-Run the `yuml:mappings` console command to save the image locally.
-
-
-# New Features
-Full personalisation for mapping rendering defining parameters or using Metadatagrapher annotations
+# Personalize the render
+Full personalisation for mapping rendering, defining parameters or using Metadatagrapher annotations
 [![Colored Map with note](http://yuml.me/23e34ac0)](http://yuml.me/23e34ac0)
 
-## Display entities attributes properties (unique, type, length, ...)
+## Hide entities attributes properties (unique, type, length, ...)
 Use the parameter file :
 ```yml
-     # app/config/parameters.yml
+     # app/config/parameters.yml        => symfony 3
+     # config/packages/dev/yuml.yaml    => symfony 4
 
     parameters:
+        onurb_yuml.show_fields_description: false
         # ...
-        onurb_yuml.show_fields_description: true
 ```
-this parameter is set to false by default
+this parameter is set to true by default since v1.1
 
-##### Warning : don't forget to also define parameter keys in parameters.yml.dist to avoid symfony update to clear your parameters
+##### Warning : In Symfony 3, don't forget to also define parameter keys in parameters.yml.dist to avoid symfony update to clear your parameters
 
 ### Toggle attributes properties on a specific class using annotations
-to show only desired classes details :
+to show only desired classes details if global parameter is set to false :
 ```php
     namespace My\Bundle\Entity
 
@@ -90,7 +96,7 @@ to show only desired classes details :
     }
 ```
 
-And if display is set to true in your parameters, you can hide specific classes details :
+And, if set to true (default), you can hide properties for a specific class :
 ```php
     namespace My\Bundle\Entity
 
@@ -106,15 +112,16 @@ And if display is set to true in your parameters, you can hide specific classes 
 ```
 
 ## Define colors for entities rendering
-### Define default color for a complete bundle by defining it in parameters.yml
+### Define default color for a complete bundle or namespace by defining it in parameters.yml
 ```yml
-     # app/config/parameters.yml
+     # app/config/parameters.yml        => Symfony 3
+     # config/packages/dev/yuml.yaml    => Symfony 4
 
     parameters:
-        # ...
         onurb_yuml.colors:
-            My\AppBundle: green
-            My\OtherBundle: red
+            App\Security: red
+            App\Blog: blue
+        # ...
 ```
 
 You can also define colors for classes this way... but it is easier using annotations as described next
@@ -137,7 +144,7 @@ Complete list of yuml colors availables [here](http://yuml.me/69f3a9ba.svg)
     }
 ```
 
-## Display specific entity method
+### Display specific entity method
 You can display specific methods in the graph, using annotations
 ```php
     namespace My\Bundle\Entity
@@ -157,6 +164,34 @@ You can display specific methods in the graph, using annotations
             // ...
         }
     }
+```
+## Hide columns
+### Hide all columns of the entity
+If you want, you can hide Entity attributes with annotations : using annotation on the class :
+
+```php
+/**
+* @Grapher\Hidecolumns
+*/
+MyEntity
+{
+    //[...]
+}
+```
+### Hide specific column
+Or hide a specific secret column you want to hide, using annotation on the Entity column :
+(it could be usefull to hide you credential logic, or to avoid the display recurrent fields,
+like created_at, or updated_at in the graph...)
+
+```php
+MyEntity
+{
+    /**
+     * @ORM\Column(/* ... */)
+     * @Grapher\HiddenColumn
+     */
+    private $secret;
+}
 ```
 
 ## Add notes to comment entities in the graph

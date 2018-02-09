@@ -2,11 +2,12 @@
 namespace OnurbTest\Bundle\YumlBundle\DependencyInjection;
 
 use Onurb\Bundle\YumlBundle\DependencyInjection\OnurbYumlExtension;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader;
 
-abstract class AbstractOnurbYumlExtensionTest extends \PHPUnit_Framework_TestCase
+abstract class AbstractOnurbYumlExtensionTest extends TestCase
 {
     /**
      * @var OnurbYumlExtension
@@ -44,7 +45,7 @@ abstract class AbstractOnurbYumlExtensionTest extends \PHPUnit_Framework_TestCas
         $this->container->loadFromExtension($this->extension->getAlias());
         $this->container->compile();
 
-        $this->assertFalse($this->container->getParameter('onurb_yuml.show_fields_description'));
+        $this->assertTrue($this->container->getParameter('onurb_yuml.show_fields_description'));
 
         $this->assertSame(array(), $this->container->getParameter('onurb_yuml.colors'));
         $this->assertSame(array(), $this->container->getParameter('onurb_yuml.notes'));

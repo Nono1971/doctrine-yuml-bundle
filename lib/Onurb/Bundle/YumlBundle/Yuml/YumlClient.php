@@ -3,9 +3,9 @@
 namespace Onurb\Bundle\YumlBundle\Yuml;
 
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
+use Doctrine\Common\Persistence\Mapping\ClassMetadataFactory as ClassMetadataFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadataFactory;
-use Doctrine\Common\Persistence\Mapping\ClassMetadataFactory as ClassMetadataFactoryInterface;
 use Onurb\Bundle\YumlBundle\Curl\Curl;
 use Onurb\Bundle\YumlBundle\Curl\CurlInterface;
 use Onurb\Doctrine\ORMMetadataGrapher\YUMLMetadataGrapher as MetadataGrapher;
@@ -17,8 +17,8 @@ use Onurb\Doctrine\ORMMetadataGrapher\YUMLMetadataGrapherInterface as MetadataGr
  *
  * @license MIT
  * @link    http://www.doctrine-project.org/
- * @author  Marco Pivetta <ocramius@gmail.com>
  * @author  Bruno Heron <herobrun@gmail.com>
+ * @author  Marco Pivetta <ocramius@gmail.com>
  **/
 class YumlClient implements YumlClientInterface
 {
@@ -96,7 +96,7 @@ class YumlClient implements YumlClientInterface
     }
 
     /**
-     * @return array
+     * @return ClassMetadata[]
      */
     private function getMetadata()
     {

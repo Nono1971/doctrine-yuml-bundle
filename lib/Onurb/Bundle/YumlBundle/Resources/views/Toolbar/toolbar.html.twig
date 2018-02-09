@@ -1,4 +1,4 @@
-{% extends 'WebProfilerBundle:Profiler:layout.html.twig' %}
+{% extends '@WebProfiler/Profiler/layout.html.twig' %}
 
 {% block toolbar %}
     {% set icon %}
@@ -8,5 +8,5 @@
     {% endset %}
     {% set text %}Visualize objects mapping{% endset %}
 
-    {% include 'WebProfilerBundle:Profiler:toolbar_item.html.twig' with { 'link': false } %}
+    {{ include('@WebProfiler/Profiler/toolbar_item.html.twig', { link: false }) }}
 {% endblock %}
