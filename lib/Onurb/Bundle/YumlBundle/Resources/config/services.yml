@@ -5,5 +5,5 @@ services:
         tags:
             -
                 name: data_collector
-                template: 'OnurbYumlBundle/Toolbar/toolbar.html.twig'
+                template: '@OnurbYuml/Toolbar/toolbar.html.twig'
                 id: 'doctrine_yuml'
