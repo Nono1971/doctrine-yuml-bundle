@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class YumlControllerTest extends TestCase
 {
-
     /**
      * @var ContainerInterface
      */
@@ -33,13 +32,13 @@ class YumlControllerTest extends TestCase
 
         $yumlClient->expects($this->once())
             ->method('getGraphUrl')
-            ->will($this->returnValue('http://yuml.me/15a98c92.png'));
+            ->will($this->returnValue('https://yuml.me/15a98c92.png'));
 
         $this->container = $this->createMock('Symfony\\Component\\DependencyInjection\\ContainerInterface');
-//
-//        $this->container->expects($this->any())->method('get')
-//            ->with($this->matches('onurb_yuml.client'))
-//            ->will($this->returnValue($yumlClient));
+
+        $this->container->expects($this->once())->method('get')
+            ->with($this->matches('onurb_yuml.client'))
+            ->will($this->returnValue($yumlClient));
 
         $this->container->expects($this->any())->method('getParameter')
             ->will(
@@ -60,16 +59,15 @@ class YumlControllerTest extends TestCase
 
         $controller = $this->createController();
 
-        $response = $controller->indexAction($yumlClient);
+        $response = $controller->indexAction();
 
-        //On teste si la réponse est bien une redirection.
         $this->assertTrue($response instanceof RedirectResponse);
     }
 
     protected function createController()
     {
         /**
-         * @var \Onurb\Bundle\YumlBundle\Controller\YumlController $controller
+         * @var YumlController $controller
          */
         $controller = new $this->controllerName;
         $controller->setContainer($this->container);

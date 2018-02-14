@@ -7,3 +7,11 @@ services:
                 name: data_collector
                 template: '@OnurbYuml/Toolbar/toolbar.html.twig'
                 id: 'doctrine_yuml'
+    onurb_yuml.client:
+        public: true
+        class: Onurb\Bundle\YumlBundle\Yuml\YumlClient
+        arguments:
+            - "@doctrine.orm.entity_manager"
+    Onurb\Bundle\YumlBundle\Command\YumlCommand:
+        tags:
+            - { name: 'console.command', command: 'yuml:mappings' }

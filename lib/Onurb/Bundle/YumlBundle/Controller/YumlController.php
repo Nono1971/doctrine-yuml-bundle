@@ -2,8 +2,6 @@
 
 namespace Onurb\Bundle\YumlBundle\Controller;
 
-use Onurb\Bundle\YumlBundle\Yuml\YumlClient;
-use Onurb\Bundle\YumlBundle\Yuml\YumlClientInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
@@ -18,12 +16,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class YumlController extends Controller
 {
     /**
-     * @param YumlClientInterface|null $yumlClient
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function indexAction(YumlClientInterface $yumlClient = null)
+    public function indexAction()
     {
-        $yumlClient = $yumlClient ? $yumlClient : new YumlClient($this->getDoctrine()->getManager());
+        $yumlClient = $this->get('onurb_yuml.client');
 
         $showDetailParam    = $this->container->getParameter('onurb_yuml.show_fields_description');
         $colorsParam        = $this->container->getParameter('onurb_yuml.colors');

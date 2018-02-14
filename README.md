@@ -16,10 +16,11 @@ It uses the yuml.me api to display your project's objects mapping.
 
   Run the `composer require onurb/doctrine-yuml-bundle` command in your console
 
-  Adjust your parameters in config/packages/dev/yuml.yaml
+  Adjust your parameters to personalize the render in config/packages/dev/yuml.yaml, or use annotations as describe bellow
+
   Adjust the route (if you want to add a prefix) in config/routes/dev/yuml.yaml
 
-### Symfony 3 or 2
+### Symfony 3
 - Add this bundle to your project as a composer dependency:
 ```javascript
     // composer.json
@@ -62,6 +63,8 @@ configure access to the yuml route (if you use security of course)
 ## Use
 Click on Doctrine icon added in the dev toolbar.
 
+Run the `yuml:mappings` console command to save the image locally.
+
 # Personalize the render
 Full personalisation for mapping rendering, defining parameters or using Metadatagrapher annotations
 [![Colored Map with note](http://yuml.me/23e34ac0)](http://yuml.me/23e34ac0)
@@ -78,7 +81,8 @@ Use the parameter file :
 ```
 this parameter is set to true by default since v1.1
 
-##### Warning : In Symfony 3, don't forget to also define parameter keys in parameters.yml.dist to avoid symfony update to clear your parameters
+##### Warning : In Symfony 3, don't forget to also define parameter keys in parameters.yml.dist to avoid symfony update
+to clear your parameters
 
 ### Toggle attributes properties on a specific class using annotations
 to show only desired classes details if global parameter is set to false :
