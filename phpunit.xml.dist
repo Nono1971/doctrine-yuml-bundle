@@ -8,9 +8,6 @@
         verbose="true"
         stopOnFailure="false"
         syntaxCheck="true" >
-    <php>
-        <server name="KERNEL_DIR" value="tests/Controller/App"/>
-    </php>
     <testsuite name="Yuml Bundle tests">
         <directory suffix="Test.php">./tests/OnurbTest/</directory>
     </testsuite>

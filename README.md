@@ -4,7 +4,7 @@
 
 Bundle to visualise doctrine entities graph with yuml in Symfony
 
-Compatible with SF4, SF3 or SF2
+Compatible with SF4 or SF3
 
 This bundle is based on Marco Pivetta's work for zend doctrine ORM Module and zend developper tools
 
