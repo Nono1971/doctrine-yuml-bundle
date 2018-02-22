@@ -3,8 +3,8 @@ namespace OnurbTest\Bundle\YumlBundle\DataCollector;
 
 use Onurb\Bundle\YumlBundle\DataCollector\DoctrineYumlDataCollector;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class DoctrineYumlDataCollectorTest extends TestCase
 {
