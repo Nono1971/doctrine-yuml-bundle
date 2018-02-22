@@ -92,7 +92,71 @@ class YumlClientTest extends TestCase
 
         $client = new YumlClient($entityManager);
 
-        $this->assertSame('https://yuml.me/15a98c92.png', $client->getGraphUrl('[Simple.Entity|+a;b;c]'));
+        $this->assertSame(
+            'https://yuml.me/15a98c92.png',
+            $client->getGraphUrl(
+                '[Simple.Entity|+a;b;c]',
+                'plain',
+                'png',
+                'TB',
+                'normal'
+            )
+        );
+
+        $this->assertSame(
+            'https://yuml.me/15a98c92.jpg',
+            $client->getGraphUrl(
+                '[Simple.Entity|+a;b;c]',
+                'plain',
+                'jpg',
+                'TB',
+                'normal'
+            )
+        );
+
+        $this->assertSame(
+            'https://yuml.me/d6ba9ce1.png',
+            $client->getGraphUrl(
+                '[Simple.Entity|+a;b;c]',
+                'plain',
+                'png',
+                'LR',
+                'huge'
+            )
+        );
+
+        $this->assertSame(
+            'https://yuml.me/4f52303c.png',
+            $client->getGraphUrl(
+                '[Simple.Entity|+a;b;c]',
+                'scruffy',
+                'png',
+                'LR',
+                'big'
+            )
+        );
+
+        $this->assertSame(
+            'https://yuml.me/0df97f73.png',
+            $client->getGraphUrl(
+                '[Simple.Entity|+a;b;c]',
+                'plain',
+                'png',
+                'RL',
+                'small'
+            )
+        );
+
+        $this->assertSame(
+            'https://yuml.me/c066b235.svg',
+            $client->getGraphUrl(
+                '[Simple.Entity|+a;b;c]',
+                'plain',
+                'svg',
+                'TB',
+                'tiny'
+            )
+        );
     }
 
     /**

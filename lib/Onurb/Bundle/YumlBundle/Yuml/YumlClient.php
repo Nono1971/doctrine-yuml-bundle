@@ -22,7 +22,7 @@ use Onurb\Doctrine\ORMMetadataGrapher\YUMLMetadataGrapherInterface as MetadataGr
  **/
 class YumlClient implements YumlClientInterface
 {
-    const YUML_POST_URL = 'https://yuml.me/diagram/plain/class';
+    const YUML_POST_URL = 'https://yuml.me/diagram/%STYLE%/class';
     const YUML_REDIRECT_URL = 'https://yuml.me/';
 
     protected $entityManager;
@@ -70,16 +70,19 @@ class YumlClient implements YumlClientInterface
      * Use yuml.me to generate an image from yuml.
      *
      * @param string $dsl_text
+     * @param string $style the yuml style plain, boring or scruffy
+     * @param string $extension the file extension to redirect to
+     * @param string $direction the direction of the graph (LR,RL, TB)
+     * @param string $scale the graph scale : huge, big, normal, small or tiny.
      *
      * @return string The url of the generated image.
      */
-    public function getGraphUrl($dsl_text)
+    public function getGraphUrl($dsl_text, $style, $extension, $direction, $scale)
     {
-        $curl = new Curl(self::YUML_POST_URL);
+        $curl = new Curl($this->makePostUrl($style, $direction, $scale));
         $curl->setPosts(array('dsl_text' => $dsl_text));
-        $return = $curl->getResponse();
 
-        return self::YUML_REDIRECT_URL . $return;
+        return self::YUML_REDIRECT_URL . $this->makeExtensionUrl($curl->getResponse(), $extension);
     }
 
     /**
@@ -116,5 +119,92 @@ class YumlClient implements YumlClientInterface
         ksort($classes);
 
         return $classes;
+    }
+
+    /**
+     * @param string $style
+     * @return string
+     */
+    private function makePostUrl($style, $direction, $scale)
+    {
+        return str_replace('%STYLE%', $this->makeStyle($style, $direction, $scale), self::YUML_POST_URL);
+    }
+
+    /**
+     * @param string $return
+     * @param string $extension
+     * @return string
+     */
+    private function makeExtensionUrl($return, $extension)
+    {
+        return explode('.', $return)[0] . '.' . $this->checkExtension($extension);
+    }
+
+    private function makeStyle($style, $direction, $scale)
+    {
+        return $this->checkStyle($style) . $this->makeDirection($direction) . $this->makeScale($scale);
+    }
+
+    /**
+     * @param string $direction
+     * @return string
+     */
+    private function makeDirection($direction)
+    {
+        switch ($direction) {
+            case 'LR':
+            case 'RL':
+                return ';dir:' . $direction;
+            default:
+                return '';
+        }
+    }
+
+    /**
+     * @param string $scale
+     * @return string
+     */
+    private function makeScale($scale)
+    {
+        switch ($scale) {
+            case 'huge':
+                return ';scale:180';
+            case 'big':
+                return ';scale:120';
+            case 'small':
+                return ';scale:80';
+            case 'tiny':
+                return ';scale:60';
+            default:
+                return '';
+        }
+    }
+
+    /**
+     * @param string $extension
+     * @return string
+     */
+    private function checkExtension($extension)
+    {
+        switch ($extension) {
+            case 'jpg':
+            case 'svg':
+            case 'pdf':
+            case 'json':
+                return $extension;
+            default:
+                return 'png';
+        }
+    }
+
+    private function checkStyle($style)
+    {
+        switch ($style) {
+            case 'boring':
+            case 'scruffy':
+                return $style;
+            default:
+                return 'plain';
+        }
     }
 }

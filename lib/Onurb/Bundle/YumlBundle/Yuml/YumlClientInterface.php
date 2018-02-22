@@ -48,10 +48,14 @@ interface YumlClientInterface
      * Use yuml.me to generate an image from yuml.
      *
      * @param string $dsl_text
+     * @param string $style
+     * @param string $extension
+     * @param string $direction
+     * @param string $scale
      *
      * @return string The url of the generated image.
      */
-    public function getGraphUrl($dsl_text);
+    public function getGraphUrl($dsl_text, $style, $extension, $direction, $scale);
 
     /**
      * @param string $graphUrl

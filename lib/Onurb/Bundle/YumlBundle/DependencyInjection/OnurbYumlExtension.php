@@ -37,6 +37,26 @@ class OnurbYumlExtension extends Extension
             $configs['yuml_notes']
         );
 
+        $container->setParameter(
+            'onurb_yuml.extension',
+            $configs['yuml_extension']
+        );
+
+        $container->setParameter(
+            'onurb_yuml.style',
+            $configs['yuml_style']
+        );
+
+        $container->setParameter(
+            'onurb_yuml.direction',
+            $configs['yuml_direction']
+        );
+
+        $container->setParameter(
+            'onurb_yuml.scale',
+            $configs['yuml_scale']
+        );
+
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
     }

@@ -50,6 +50,14 @@ class YumlControllerTest extends TestCase
                             case 'onurb_yuml.colors':
                             case 'onurb_yuml.notes':
                                 return array();
+                            case 'onurb_yuml.extension':
+                                return 'png';
+                            case 'onurb_yuml.style':
+                                return 'plain';
+                            case 'onurb_yuml.direction':
+                                return 'TB';
+                            case 'onurb_yuml.scale':
+                                return 'normal';
                             default:
                                 return false;
                         }

@@ -7,9 +7,7 @@
         http://symfony.com/schema/dic/symfony/symfony-1.0.xsd">
 
     <parameters>
-        <parameter key="onurb_yuml.show_fields_description">true</parameter>
-        <parameter key="onurb_yuml.colors"  type="collection"></parameter>
-        <parameter key="onurb_yuml.notes"  type="collection"></parameter>
+        <parameter key="onurb_yuml.scale">tiny</parameter>
     </parameters>
 
     <!-- ... -->

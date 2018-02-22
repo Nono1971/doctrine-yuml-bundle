@@ -39,6 +39,22 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
+                ->enumNode('yuml_extension')
+                    ->values(array('png', 'jpg', 'svg', 'pdf', 'json'))
+                    ->defaultValue('png')
+                ->end()
+                ->enumNode('yuml_style')
+                    ->values(array('plain', 'boring', 'scruffy'))
+                    ->defaultValue('plain')
+                ->end()
+                ->enumNode('yuml_direction')
+                    ->values(array('LR', 'TB', 'RL'))
+                    ->defaultValue('TB')
+                ->end()
+                ->enumNode('yuml_scale')
+                    ->values(array('huge', 'big', 'normal', 'small', 'tiny'))
+                    ->defaultValue('normal')
+                ->end()
             ->end();
 
         return $treeBuilder;

@@ -37,8 +37,18 @@ class YumlCommand extends ContainerAwareCommand
         $showDetailParam = $this->getContainer()->getParameter('onurb_yuml.show_fields_description');
         $colorsParam = $this->getContainer()->getParameter('onurb_yuml.colors');
         $notesParam = $this->getContainer()->getParameter('onurb_yuml.notes');
+        $styleParam = $this->getContainer()->getParameter('onurb_yuml.style');
+        $extensionParam = $this->getContainer()->getParameter('onurb_yuml.extension');
+        $direction = $this->getContainer()->getParameter('onurb_yuml.direction');
+        $scale = $this->getContainer()->getParameter('onurb_yuml.scale');
 
-        $graphUrl = $yumlClient->getGraphUrl($yumlClient->makeDslText($showDetailParam, $colorsParam, $notesParam));
+        $graphUrl = $yumlClient->getGraphUrl(
+            $yumlClient->makeDslText($showDetailParam, $colorsParam, $notesParam),
+            $styleParam,
+            $extensionParam,
+            $direction,
+            $scale
+        );
         $yumlClient->downloadImage($graphUrl, $filename);
 
         $output->writeln(sprintf('Downloaded <info>%s</info> to <info>%s</info>', $graphUrl, $filename));

@@ -1,6 +1,6 @@
 # doctrine-yuml-bundle
 
-[![Build Status](https://travis-ci.org/Nono1971/doctrine-yuml-bundle.svg?branch=master)](https://travis-ci.org/Nono1971/doctrine-yuml-bundle) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Nono1971/doctrine-yuml-bundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Nono1971/doctrine-yuml-bundle/?branch=master) [![Code Coverage](https://scrutinizer-ci.com/g/Nono1971/doctrine-yuml-bundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Nono1971/doctrine-yuml-bundle/?branch=master) [![Build Status](https://scrutinizer-ci.com/g/Nono1971/doctrine-yuml-bundle/badges/build.png?b=master)](https://scrutinizer-ci.com/g/Nono1971/doctrine-yuml-bundle/build-status/master) [![Latest Stable Version](https://poser.pugx.org/onurb/doctrine-yuml-bundle/v/stable)](https://packagist.org/packages/onurb/doctrine-yuml-bundle) [![Total Downloads](https://poser.pugx.org/onurb/doctrine-yuml-bundle/downloads)](https://packagist.org/packages/onurb/doctrine-yuml-bundle)
+[![Build Status](https://travis-ci.org/Nono1971/doctrine-yuml-bundle.svg?branch=master)](https://travis-ci.org/Nono1971/doctrine-yuml-bundle) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Nono1971/doctrine-yuml-bundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Nono1971/doctrine-yuml-bundle/?branch=master) [![Code Coverage](https://scrutinizer-ci.com/g/Nono1971/doctrine-yuml-bundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Nono1971/doctrine-yuml-bundle/?branch=master) [![Build Status](https://scrutinizer-ci.com/g/Nono1971/doctrine-yuml-bundle/badges/build.png?b=master)](https://scrutinizer-ci.com/g/Nono1971/doctrine-yuml-bundle/build-status/master) [![License](https://poser.pugx.org/onurb/doctrine-yuml-bundle/license)](https://packagist.org/packages/onurb/doctrine-yuml-bundle) [![Latest Stable Version](https://poser.pugx.org/onurb/doctrine-yuml-bundle/v/stable)](https://packagist.org/packages/onurb/doctrine-yuml-bundle) [![Total Downloads](https://poser.pugx.org/onurb/doctrine-yuml-bundle/downloads)](https://packagist.org/packages/onurb/doctrine-yuml-bundle)
 
 Bundle to visualise doctrine entities graph with yuml in Symfony
 
@@ -67,7 +67,56 @@ Run the `yuml:mappings` console command to save the image locally.
 
 # Personalize the render
 Full personalisation for mapping rendering, defining parameters or using Metadatagrapher annotations
-[![Colored Map with note](http://yuml.me/23e34ac0)](http://yuml.me/23e34ac0)
+[![Colored Map with note](https://yuml.me/23e34ac0.png)](https://yuml.me/23e34ac0.png)
+
+## define the output file extension
+Use the parameter file :
+```yml
+     # app/config/parameters.yml        => symfony 3
+     # config/packages/dev/yuml.yaml    => symfony 4
+
+    parameters:
+        onurb_yuml.extension: svg
+        # ...
+```
+Extensions allowed : jpg, png (default), svg, pdf, or json
+
+## define the yuml rendering style
+Use the parameter file :
+```yml
+     # app/config/parameters.yml        => symfony 3
+     # config/packages/dev/yuml.yaml    => symfony 4
+
+    parameters:
+        onurb_yuml.style: scruffy
+        # ...
+```
+Styles allowed : plain (default), boring or scruffy
+
+## define the graph direction
+Use the parameter file :
+```yml
+     # app/config/parameters.yml        => symfony 3
+     # config/packages/dev/yuml.yaml    => symfony 4
+
+    parameters:
+        onurb_yuml.direction: LR
+        # ...
+```
+Directions allowed : LR (left to Right), RL (Right to Left), TB (Top to bottom => default).
+
+## define the graph scale
+Use the parameter file :
+```yml
+     # app/config/parameters.yml        => symfony 3
+     # config/packages/dev/yuml.yaml    => symfony 4
+
+    parameters:
+        onurb_yuml.scale: huge
+        # ...
+```
+Scales allowed : huge, big, normal (default), small or tiny.
+
 
 ## Hide entities attributes properties (unique, type, length, ...)
 Use the parameter file :
@@ -130,8 +179,8 @@ And, if set to true (default), you can hide properties for a specific class :
 
 You can also define colors for classes this way... but it is easier using annotations as described next
 
-Complete list of yuml colors availables [here](http://yuml.me/69f3a9ba.svg)
-                                       [![Color list](http://yuml.me/69f3a9ba.svg)](http://yuml.me/69f3a9ba.svg)
+Complete list of yuml colors availables [here](https://yuml.me/69f3a9ba.svg)
+                                       [![Color list](https://yuml.me/69f3a9ba.svg)](https://yuml.me/69f3a9ba.svg)
 
 ### Define Entity color in graph using annotations
 ```php
