@@ -1,10 +1,16 @@
 # doctrine-yuml-bundle
 
-[![Build Status](https://travis-ci.org/Nono1971/doctrine-yuml-bundle.svg?branch=master)](https://travis-ci.org/Nono1971/doctrine-yuml-bundle) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Nono1971/doctrine-yuml-bundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Nono1971/doctrine-yuml-bundle/?branch=master) [![Code Coverage](https://scrutinizer-ci.com/g/Nono1971/doctrine-yuml-bundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Nono1971/doctrine-yuml-bundle/?branch=master) [![Build Status](https://scrutinizer-ci.com/g/Nono1971/doctrine-yuml-bundle/badges/build.png?b=master)](https://scrutinizer-ci.com/g/Nono1971/doctrine-yuml-bundle/build-status/master) [![License](https://poser.pugx.org/onurb/doctrine-yuml-bundle/license)](https://packagist.org/packages/onurb/doctrine-yuml-bundle) [![Latest Stable Version](https://poser.pugx.org/onurb/doctrine-yuml-bundle/v/stable)](https://packagist.org/packages/onurb/doctrine-yuml-bundle) [![Total Downloads](https://poser.pugx.org/onurb/doctrine-yuml-bundle/downloads)](https://packagist.org/packages/onurb/doctrine-yuml-bundle)
+[![Build Status](https://travis-ci.org/Nono1971/doctrine-yuml-bundle.svg?branch=master)](https://travis-ci.org/Nono1971/doctrine-yuml-bundle)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Nono1971/doctrine-yuml-bundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Nono1971/doctrine-yuml-bundle/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/Nono1971/doctrine-yuml-bundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Nono1971/doctrine-yuml-bundle/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/Nono1971/doctrine-yuml-bundle/badges/build.png?b=master)](https://scrutinizer-ci.com/g/Nono1971/doctrine-yuml-bundle/build-status/master)
+[![License](https://poser.pugx.org/onurb/doctrine-yuml-bundle/license)](https://packagist.org/packages/onurb/doctrine-yuml-bundle)
+[![Latest Stable Version](https://poser.pugx.org/onurb/doctrine-yuml-bundle/v/stable)](https://packagist.org/packages/onurb/doctrine-yuml-bundle)
+[![Total Downloads](https://poser.pugx.org/onurb/doctrine-yuml-bundle/downloads)](https://packagist.org/packages/onurb/doctrine-yuml-bundle)
+[![Monthly Downloads](https://poser.pugx.org/onurb/doctrine-yuml-bundle/d/monthly)](https://packagist.org/packages/onurb/doctrine-yuml-bundle)
+[![Daily Downloads](https://poser.pugx.org/onurb/doctrine-yuml-bundle/d/daily)](https://packagist.org/packages/onurb/doctrine-yuml-bundle)
 
-Bundle to visualise doctrine entities graph with yuml in Symfony
-
-Compatible with SF4 or SF3
+Bundle to visualise doctrine entities graph with yuml in Symfony4
 
 This bundle is based on Marco Pivetta's work for zend doctrine ORM Module and zend developper tools
 
@@ -21,6 +27,9 @@ It uses the yuml.me api to display your project's objects mapping.
   Adjust the route (if you want to add a prefix) in config/routes/dev/yuml.yaml
 
 ### Symfony 3
+
+   symfony 3 is not supported since 1.1.6, if you didn't migrate to SF4 yet, use version 1.1.5
+
 - Add this bundle to your project as a composer dependency:
 ```javascript
     // composer.json
@@ -28,7 +37,7 @@ It uses the yuml.me api to display your project's objects mapping.
         // ...
         require: {
             // ...
-            "onurb/doctrine-yuml-bundle": "~1.0"
+            "onurb/doctrine-yuml-bundle": "1.1.5"
         }
     }
 ```

@@ -121,8 +121,11 @@ class YumlClient implements YumlClientInterface
         return $classes;
     }
 
+
     /**
      * @param string $style
+     * @param string $direction
+     * @param string $scale
      * @return string
      */
     private function makePostUrl($style, $direction, $scale)
@@ -140,6 +143,12 @@ class YumlClient implements YumlClientInterface
         return explode('.', $return)[0] . '.' . $this->checkExtension($extension);
     }
 
+    /**
+     * @param string $style
+     * @param string $direction
+     * @param string $scale
+     * @return string
+     */
     private function makeStyle($style, $direction, $scale)
     {
         return $this->checkStyle($style) . $this->makeDirection($direction) . $this->makeScale($scale);

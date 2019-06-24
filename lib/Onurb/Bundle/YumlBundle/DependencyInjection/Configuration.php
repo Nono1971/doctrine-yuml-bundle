@@ -18,8 +18,9 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('onurb_yuml');
+        $treeBuilder = new TreeBuilder('onurb_yuml');
+
+        $rootNode = $treeBuilder->getRootNode();
 
         $rootNode
             ->children()
