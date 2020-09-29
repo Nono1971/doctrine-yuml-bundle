@@ -16,6 +16,10 @@ services:
     onurb_yuml.controller:
         public: true
         class: Onurb\Bundle\YumlBundle\Controller\YumlController
+        calls:
+            - setContainer: ['@Psr\Container\ContainerInterface']
+        tags:
+            - { name: 'container.service_subscriber' }
         arguments:
             - "@onurb_yuml.client"
             -
