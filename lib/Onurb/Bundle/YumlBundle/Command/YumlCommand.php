@@ -3,8 +3,8 @@ namespace Onurb\Bundle\YumlBundle\Command;
 
 use Onurb\Bundle\YumlBundle\Yuml\YumlClient;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -52,5 +52,7 @@ class YumlCommand extends ContainerAwareCommand
         $yumlClient->downloadImage($graphUrl, $filename);
 
         $output->writeln(sprintf('Downloaded <info>%s</info> to <info>%s</info>', $graphUrl, $filename));
+
+        return 0;
     }
 }
