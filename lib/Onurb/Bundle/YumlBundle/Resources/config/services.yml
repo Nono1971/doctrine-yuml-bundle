@@ -12,6 +12,25 @@ services:
         class: Onurb\Bundle\YumlBundle\Yuml\YumlClient
         arguments:
             - "@doctrine.orm.entity_manager"
+
+    onurb_yuml.controller:
+        public: true
+        class: Onurb\Bundle\YumlBundle\Controller\YumlController
+        calls:
+            - setContainer: ['@Psr\Container\ContainerInterface']
+        tags:
+            - { name: 'container.service_subscriber' }
+        arguments:
+            - "@onurb_yuml.client"
+            -
+                colors: '%onurb_yuml.colors%'
+                direction: '%onurb_yuml.direction%'
+                extension: '%onurb_yuml.extension%'
+                notes: '%onurb_yuml.notes%'
+                scale: '%onurb_yuml.scale%'
+                show_fields_description: '%onurb_yuml.show_fields_description%'
+                style: '%onurb_yuml.style%'
+
     Onurb\Bundle\YumlBundle\Command\YumlCommand:
         tags:
             - { name: 'console.command', command: 'yuml:mappings' }
