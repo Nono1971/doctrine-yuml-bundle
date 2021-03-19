@@ -1,6 +1,7 @@
 <?php
 namespace Onurb\Bundle\YumlBundle\Command;
 
+use Onurb\Bundle\YumlBundle\Config\Config;
 use Onurb\Bundle\YumlBundle\Yuml\YumlClientInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -23,24 +24,16 @@ class YumlCommand extends Command
     private $client;
 
     /**
-     * @var array
+     * @var Config
      */
     private $config;
 
-    public function __construct(YumlClientInterface $client, array $config = [])
+    public function __construct(YumlClientInterface $client, Config $config)
     {
         parent::__construct();
 
         $this->client = $client;
-        $this->config = array_merge([
-            'show_fields_description' => false,
-            'colors' => [],
-            'notes' => [],
-            'extension' => 'png',
-            'style' => 'plain',
-            'direction' => 'TB',
-            'scale' => 'normal',
-        ], $config);
+        $this->config = $config;
     }
 
     protected function configure()
@@ -60,13 +53,13 @@ class YumlCommand extends Command
     {
         $filename = $input->getOption('filename');
 
-        $showDetailParam    = $this->config['show_fields_description'];
-        $colorsParam        = $this->config['colors'];
-        $notesParam         = $this->config['notes'];
-        $styleParam         = $this->config['style'];
-        $extensionParam     = $this->config['extension'];
-        $direction          = $this->config['direction'];
-        $scale              = $this->config['scale'];
+        $showDetailParam = $this->config->getParameter('show_fields_description');
+        $colorsParam = $this->config->getParameter('colors');
+        $notesParam = $this->config->getParameter('notes');
+        $styleParam = $this->config->getParameter('style');
+        $extensionParam = $this->config->getParameter('extension');
+        $direction = $this->config->getParameter('direction');
+        $scale = $this->config->getParameter('scale');
 
         $graphUrl = $this->client->getGraphUrl(
             $this->client->makeDslText($showDetailParam, $colorsParam, $notesParam),

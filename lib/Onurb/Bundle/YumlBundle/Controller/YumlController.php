@@ -2,6 +2,7 @@
 
 namespace Onurb\Bundle\YumlBundle\Controller;
 
+use Onurb\Bundle\YumlBundle\Config\Config;
 use Onurb\Bundle\YumlBundle\Yuml\YumlClient;
 use Onurb\Bundle\YumlBundle\Yuml\YumlClientInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,22 +25,14 @@ class YumlController extends AbstractController
     private $client;
 
     /**
-     * @var array
+     * @var Config
      */
     private $config;
 
-    public function __construct(YumlClientInterface $client, array $config = [])
+    public function __construct(YumlClientInterface $client, Config $config)
     {
         $this->client = $client;
-        $this->config = array_merge([
-            'show_fields_description' => false,
-            'colors' => [],
-            'notes' => [],
-            'extension' => 'png',
-            'style' => 'plain',
-            'direction' => 'TB',
-            'scale' => 'normal',
-        ], $config);
+        $this->config = $config;
     }
 
     /**
@@ -47,13 +40,13 @@ class YumlController extends AbstractController
      */
     public function indexAction()
     {
-        $showDetailParam    = $this->config['show_fields_description'];
-        $colorsParam        = $this->config['colors'];
-        $notesParam         = $this->config['notes'];
-        $styleParam         = $this->config['style'];
-        $extensionParam     = $this->config['extension'];
-        $directionParam     = $this->config['direction'];
-        $scale              = $this->config['scale'];
+        $showDetailParam    = $this->config->getParameter('show_fields_description');
+        $colorsParam        = $this->config->getParameter('colors');
+        $notesParam         = $this->config->getParameter('notes');
+        $styleParam         = $this->config->getParameter('style');
+        $extensionParam     = $this->config->getParameter('extension');
+        $directionParam     = $this->config->getParameter('direction');
+        $scale              = $this->config->getParameter('scale');
 
         return $this->redirect(
             $this->client->getGraphUrl(

@@ -2,6 +2,7 @@
 namespace OnurbTest\Bundle\YumlBundle\Command;
 
 use Onurb\Bundle\YumlBundle\Command\YumlCommand;
+use Onurb\Bundle\YumlBundle\Config\Config;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
@@ -43,7 +44,7 @@ class YumlCommandTest extends TestCase
             ->will($this->returnValue(self::YUML_LINK));
 
         $this->application = new Application();
-        $this->application->add(new YumlCommand($yumlClient));
+        $this->application->add(new YumlCommand($yumlClient, new Config()));
         $this->command = $this->application->find('yuml:mappings');
 
         $this->commandTester = new CommandTester($this->command);

@@ -7,21 +7,11 @@ services:
                 name: data_collector
                 template: '@OnurbYuml/Toolbar/toolbar.html.twig'
                 id: 'doctrine_yuml'
-    onurb_yuml.client:
-        public: true
-        class: Onurb\Bundle\YumlBundle\Yuml\YumlClient
-        arguments:
-            - "@doctrine.orm.entity_manager"
 
-    onurb_yuml.controller:
-        public: true
-        class: Onurb\Bundle\YumlBundle\Controller\YumlController
-        calls:
-            - setContainer: ['@Psr\Container\ContainerInterface']
-        tags:
-            - { name: 'container.service_subscriber' }
+    onurb_yuml.config:
+        public: false
+        class: Onurb\Bundle\YumlBundle\Config\Config
         arguments:
-            - "@onurb_yuml.client"
             -
                 colors: '%onurb_yuml.colors%'
                 direction: '%onurb_yuml.direction%'
@@ -31,6 +21,24 @@ services:
                 show_fields_description: '%onurb_yuml.show_fields_description%'
                 style: '%onurb_yuml.style%'
 
+    onurb_yuml.client:
+        public: true
+        class: Onurb\Bundle\YumlBundle\Yuml\YumlClient
+        arguments:
+            - "@doctrine.orm.entity_manager"
+
+    onurb_yuml.controller:
+        public: true
+        class: Onurb\Bundle\YumlBundle\Controller\YumlController
+        tags:
+            - { name: 'container.service_subscriber' }
+        arguments:
+            - "@onurb_yuml.client"
+            - "@onurb_yuml.config"
+
     Onurb\Bundle\YumlBundle\Command\YumlCommand:
+        arguments:
+            - "@onurb_yuml.client"
+            - "@onurb_yuml.config"
         tags:
             - { name: 'console.command', command: 'yuml:mappings' }

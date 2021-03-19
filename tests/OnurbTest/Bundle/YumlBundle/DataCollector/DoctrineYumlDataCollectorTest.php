@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @covers \Onurb\Bundle\YumlBundle\DataCollector\DoctrineYumlDataCollector
  */
-final class DoctrineYumlDataCollectorTest extends TestCase
+class DoctrineYumlDataCollectorTest extends TestCase
 {
     public function testIsInstanceOf(): void
     {

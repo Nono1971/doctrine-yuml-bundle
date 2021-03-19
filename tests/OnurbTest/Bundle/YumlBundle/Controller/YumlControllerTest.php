@@ -2,6 +2,7 @@
 
 namespace OnurbTest\Bundle\YumlBundle\Controller;
 
+use Onurb\Bundle\YumlBundle\Config\Config;
 use Onurb\Bundle\YumlBundle\Controller\YumlController;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -9,7 +10,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 /**
  * @covers \Onurb\Bundle\YumlBundle\Controller\YumlController
  */
-final class YumlControllerTest extends TestCase
+class YumlControllerTest extends TestCase
 {
     public function testIndexAction(): void
     {
@@ -32,6 +33,6 @@ final class YumlControllerTest extends TestCase
             ->method('getGraphUrl')
             ->will($this->returnValue('https://yuml.me/15a98c92.png'));
 
-        return new YumlController($yumlClient);
+        return new YumlController($yumlClient, new Config());
     }
 }

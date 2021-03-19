@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * @covers \Onurb\Bundle\YumlBundle\Curl\Curl
  */
-final class CurlTest extends TestCase
+class CurlTest extends TestCase
 {
     public function testIsInstanceOf(): void
     {
