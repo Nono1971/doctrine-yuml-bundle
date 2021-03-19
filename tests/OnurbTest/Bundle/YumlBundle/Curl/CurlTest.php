@@ -1,15 +1,16 @@
 <?php
 namespace OnurbTest\Bundle\YumlBundle\Curl;
 
+use bovigo\vfs\vfsStream;
 use Onurb\Bundle\YumlBundle\Curl\Curl;
 use PHPUnit\Framework\TestCase;
 
-class CurlTest extends TestCase
+/**
+ * @covers \Onurb\Bundle\YumlBundle\Curl\Curl
+ */
+final class CurlTest extends TestCase
 {
-    /**
-     * @covers \Onurb\Bundle\YumlBundle\Curl\Curl
-     */
-    public function testIsInstanceOf()
+    public function testIsInstanceOf(): void
     {
         $testUrl = 'http://testUrl.test';
         $curl = curl_init();
@@ -21,22 +22,17 @@ class CurlTest extends TestCase
         curl_close($curl);
     }
 
-    /**
-     * @covers \Onurb\Bundle\YumlBundle\Curl\Curl
-     * @expectedException \Exception
-     */
-    public function testResponseWithWrongUrl()
+    public function testResponseWithWrongUrl(): void
     {
         $testUrl = 'http://localhost.test/url_that_doesnt_exists';
         $curl = new Curl($testUrl);
 
+        $this->expectException(\Exception::class);
+
         $curl->getResponse();
     }
 
-    /**
-     * @covers \Onurb\Bundle\YumlBundle\Curl\Curl
-     */
-    public function testResponseWithCorrectUrl()
+    public function testResponseWithCorrectUrl(): void
     {
         $testUrl = 'https://yuml.me';
         $curl = new Curl($testUrl);
@@ -45,10 +41,7 @@ class CurlTest extends TestCase
         $this->assertSame('<!DOCTYPE', explode(' ', $response)[0]);
     }
 
-    /**
-     * @covers \Onurb\Bundle\YumlBundle\Curl\Curl
-     */
-    public function testResponseWithPostData()
+    public function testResponseWithPostData(): void
     {
         $testUrl = 'https://yuml.me/diagram/plain/class';
         $curl = new Curl($testUrl);
@@ -59,13 +52,10 @@ class CurlTest extends TestCase
         $curl->setPosts($posts);
         $response = $curl->getResponse();
 
-        $this->assertSame('15a98c92.png', $response);
+        $this->assertSame('15a98c92.svg', $response);
     }
 
-    /**
-     * @covers \Onurb\Bundle\YumlBundle\Curl\Curl
-     */
-    public function testDowloadFile()
+    public function testDowloadFile(): void
     {
         $vfsRoot = vfsStream::setup();
 
