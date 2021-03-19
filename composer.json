@@ -43,7 +43,8 @@
         "ext-curl":                       "*",
         "squizlabs/php_codesniffer":      "~2",
         "doctrine/doctrine-bundle":       "^2.0",
-        "phpunit/phpunit":                "~6.5"
+        "phpunit/phpunit":                "~6.5",
+        "mikey179/vfsstream": "2.0.x-dev"
     },
     "autoload": {
       "psr-4":    { "Onurb\\Bundle\\YumlBundle\\":"lib/Onurb/Bundle/YumlBundle/" }

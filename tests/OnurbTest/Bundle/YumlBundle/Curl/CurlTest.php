@@ -67,18 +67,18 @@ class CurlTest extends TestCase
      */
     public function testDowloadFile()
     {
+        $vfsRoot = vfsStream::setup();
+
         $fileUrl = 'https://yuml.me/15a98c92.png';
         $fileName = 'test.png';
+        $output = $vfsRoot->url() . '/' . $fileName;
 
-        $this->assertFalse(file_exists($fileName));
+        $this->assertFalse(file_exists($output));
 
         $curl = new Curl($fileUrl);
-        $curl->setOutput($fileName);
+        $curl->setOutput($output);
         $curl->getResponse();
 
-        $this->assertTrue(file_exists($fileName));
-        if (file_exists($fileName)) {
-            unlink($fileName);
-        }
+        $this->assertTrue(file_exists($output));
     }
 }
