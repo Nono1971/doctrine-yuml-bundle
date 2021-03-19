@@ -58,6 +58,7 @@
         }
     },
     "scripts": {
-        "test": "phpunit -c phpunit.xml.dist"
+        "test": "phpunit -c phpunit.xml.dist",
+        "cs": "phpcs --standard=PSR2 ./lib/ ./tests/OnurbTest/"
     }
 }
