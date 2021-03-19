@@ -27,12 +27,20 @@ class YumlCommand extends Command
      */
     private $config;
 
-    public function __construct(YumlClientInterface $client, array $config)
+    public function __construct(YumlClientInterface $client, array $config = [])
     {
         parent::__construct();
 
         $this->client = $client;
-        $this->config = $config;
+        $this->config = array_merge([
+            'show_fields_description' => false,
+            'colors' => [],
+            'notes' => [],
+            'extension' => 'png',
+            'style' => 'plain',
+            'direction' => 'TB',
+            'scale' => 'normal',
+        ], $config);
     }
 
     protected function configure()

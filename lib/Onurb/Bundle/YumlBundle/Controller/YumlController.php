@@ -28,10 +28,18 @@ class YumlController extends AbstractController
      */
     private $config;
 
-    public function __construct(YumlClientInterface $client, array $config)
+    public function __construct(YumlClientInterface $client, array $config = [])
     {
         $this->client = $client;
-        $this->config = $config;
+        $this->config = array_merge([
+            'show_fields_description' => false,
+            'colors' => [],
+            'notes' => [],
+            'extension' => 'png',
+            'style' => 'plain',
+            'direction' => 'TB',
+            'scale' => 'normal',
+        ], $config);
     }
 
     /**

@@ -3,17 +3,15 @@
 namespace OnurbTest\Bundle\YumlBundle\Controller;
 
 use Onurb\Bundle\YumlBundle\Controller\YumlController;
-use Onurb\Bundle\YumlBundle\Yuml\YumlClientInterface;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
-class YumlControllerTest extends TestCase
+/**
+ * @covers \Onurb\Bundle\YumlBundle\Controller\YumlController
+ */
+final class YumlControllerTest extends TestCase
 {
-    /**
-     * @covers \Onurb\Bundle\YumlBundle\Controller\YumlController
-     */
-    public function testIndexAction()
+    public function testIndexAction(): void
     {
         $controller = $this->createController();
 
@@ -22,19 +20,9 @@ class YumlControllerTest extends TestCase
         $this->assertTrue($response instanceof RedirectResponse);
     }
 
-    protected function createController()
+    protected function createController(): YumlController
     {
-        $config = [
-            'show_fields_description' => false,
-            'colors' => [],
-            'notes' => [],
-            'extension' => 'png',
-            'style' => 'plain',
-            'direction' => 'TB',
-            'scale' => 'normal',
-        ];
-
-        $yumlClient = $this->createMock(YumlClientInterface::class);
+        $yumlClient = $this->createMock('Onurb\\Bundle\\YumlBundle\\Yuml\\YumlClientInterface');
 
         $yumlClient->expects($this->once())
             ->method('makeDslText')
@@ -44,8 +32,6 @@ class YumlControllerTest extends TestCase
             ->method('getGraphUrl')
             ->will($this->returnValue('https://yuml.me/15a98c92.png'));
 
-        $controller = new YumlController($yumlClient, $config);
-
-        return($controller);
+        return new YumlController($yumlClient);
     }
 }
