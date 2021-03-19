@@ -35,10 +35,6 @@ class YumlCommandTest extends TestCase
     {
         parent::setUp();
 
-        $this->application = new Application();
-        $this->application->add(new YumlCommand());
-        $this->command = $this->application->find('yuml:mappings');
-
         $yumlClient = $this->createMock('Onurb\\Bundle\\YumlBundle\\Yuml\\YumlClientInterface');
 
         $yumlClient->expects($this->once())
@@ -49,30 +45,17 @@ class YumlCommandTest extends TestCase
             ->method('getGraphUrl')
             ->will($this->returnValue(self::YUML_LINK));
 
-        $this->container = $this->createMock('Symfony\\Component\\DependencyInjection\\ContainerInterface');
-
-        $this->container->expects($this->once())->method('get')
-            ->with($this->matches('onurb_yuml.client'))
-                    ->will($this->returnValue($yumlClient));
-
-        $this->container->expects($this->any())->method('getParameter')
-            ->will(
-                $this->returnCallback(
-                    function ($arg) {
-                        switch ($arg) {
-                            case 'onurb_yuml.show_fields_description':
-                                return false;
-                            case 'onurb_yuml.colors':
-                            case 'onurb_yuml.notes':
-                                return array();
-                            default:
-                                return false;
-                        }
-                    }
-                )
-            );
-
-        $this->command->setContainer($this->container);
+        $this->application = new Application();
+        $this->application->add(new YumlCommand($yumlClient, [
+            'show_fields_description' => false,
+            'colors' => [],
+            'notes' => [],
+            'extension' => 'png',
+            'style' => 'plain',
+            'direction' => 'TB',
+            'scale' => 'normal',
+        ]));
+        $this->command = $this->application->find('yuml:mappings');
 
         $this->commandTester = new CommandTester($this->command);
     }
@@ -82,9 +65,9 @@ class YumlCommandTest extends TestCase
      */
     public function testExecute()
     {
-        $this->commandTester->execute(array(
+        $this->commandTester->execute([
             'command'   => $this->command->getName()
-        ));
+        ]);
 
         $this->assertRegExp('/.../', $this->commandTester->getDisplay());
         $this->assertSame('Downloaded', explode(' ', $this->commandTester->getDisplay())[0]);

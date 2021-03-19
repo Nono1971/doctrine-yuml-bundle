@@ -3,6 +3,7 @@
 namespace Onurb\Bundle\YumlBundle\Controller;
 
 use Onurb\Bundle\YumlBundle\Yuml\YumlClient;
+use Onurb\Bundle\YumlBundle\Yuml\YumlClientInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
@@ -18,7 +19,7 @@ class YumlController extends AbstractController
 {
 
     /**
-     * @var YumlClient
+     * @var YumlClientInterface
      */
     private $client;
 
@@ -27,7 +28,7 @@ class YumlController extends AbstractController
      */
     private $config;
 
-    public function __construct(YumlClient $client, array $config)
+    public function __construct(YumlClientInterface $client, array $config)
     {
         $this->client = $client;
         $this->config = $config;
