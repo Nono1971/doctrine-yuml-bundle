@@ -47,7 +47,10 @@
         "mikey179/vfsstream": "2.0.x-dev"
     },
     "autoload": {
-      "psr-4":    { "Onurb\\Bundle\\YumlBundle\\":"lib/Onurb/Bundle/YumlBundle/" }
+        "psr-4":    { "Onurb\\Bundle\\YumlBundle\\": "lib/Onurb/Bundle/YumlBundle/" }
+    },
+    "autoload-dev": {
+        "psr-4":    { "OnurbTest\\Bundle\\YumlBundle\\": "tests/OnurbTest/Bundle/YumlBundle" }
     },
     "extra": {
         "symfony": {
