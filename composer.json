@@ -51,5 +51,8 @@
         "symfony": {
             "allow-contrib": "true"
         }
+    },
+    "scripts": {
+        "test": "phpunit -c phpunit.xml.dist"
     }
 }
