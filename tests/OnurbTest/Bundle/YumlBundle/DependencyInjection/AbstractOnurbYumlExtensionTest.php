@@ -19,7 +19,7 @@ abstract class AbstractOnurbYumlExtensionTest extends TestCase
      */
     private $container;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->extension = new OnurbYumlExtension();
         $this->container = new ContainerBuilder();
