@@ -29,7 +29,8 @@ class DoctrineYumlDataCollectorTest extends TestCase
         $dataCollector->collect(new Request(), new Response());
 
         $this->assertSame(
-            "O:63:\"Onurb\\Bundle\\YumlBundle\\DataCollector\\DoctrineYumlDataCollector\":1:{s:7:\"\0*\0data\";a:1:{s:13:\"doctrine_yuml\";a:0:{}}}",
+            "O:63:\"Onurb\\Bundle\\YumlBundle\\DataCollector\\DoctrineYumlDataCollector\""
+            .":1:{s:7:\"\0*\0data\";a:1:{s:13:\"doctrine_yuml\";a:0:{}}}",
             serialize($dataCollector)
         );
     }
@@ -40,7 +41,8 @@ class DoctrineYumlDataCollectorTest extends TestCase
         $dataCollector->collect(new Request(), new Response());
 
         $this->assertSame(
-            "O:63:\"Onurb\\Bundle\\YumlBundle\\DataCollector\\DoctrineYumlDataCollector\":1:{s:7:\"\0*\0data\";a:1:{s:13:\"doctrine_yuml\";a:0:{}}}",
+            "O:63:\"Onurb\\Bundle\\YumlBundle\\DataCollector\\DoctrineYumlDataCollector\""
+            .":1:{s:7:\"\0*\0data\";a:1:{s:13:\"doctrine_yuml\";a:0:{}}}",
             serialize($dataCollector)
         );
 
