@@ -5,19 +5,31 @@ matrix:
         - php: 7.1
           env: SYMFONY_VERSION=~4.0
         - php: 7.2
-          env: SYMFONY_VERSION=~4.0
+          env:
+            SYMFONY_VERSION=~4.0
+            XDEBUG_MODE=coverage
         - php: 7.3
-          env: SYMFONY_VERSION=~4.0
+          env:
+            SYMFONY_VERSION=~4.0
+            XDEBUG_MODE=coverage
         - php: 7.4
-          env: SYMFONY_VERSION=~4.0
+          env:
+            SYMFONY_VERSION=~4.0
+            XDEBUG_MODE=coverage
         - php: 7.1
           env: SYMFONY_VERSION=~5.0
         - php: 7.2
-          env: SYMFONY_VERSION=~5.0
+          env:
+            SYMFONY_VERSION=~5.0
+            XDEBUG_MODE=coverage
         - php: 7.3
-          env: SYMFONY_VERSION=~5.0
+          env:
+            SYMFONY_VERSION=~5.0
+            XDEBUG_MODE=coverage
         - php: 7.4
-          env: SYMFONY_VERSION=~5.0
+          env:
+            SYMFONY_VERSION=~5.0
+            XDEBUG_MODE=coverage
 
 before_install:
     - if [ $stability != "" ]; then composer config minimum-stability $stability; fi
