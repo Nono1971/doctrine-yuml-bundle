@@ -6,12 +6,6 @@ use PHPUnit\Framework\TestCase;
 
 class YumlClientTest extends TestCase
 {
-
-    public function setUp()
-    {
-        parent::setUp();
-    }
-
     /**
      * @covers \Onurb\Bundle\YumlBundle\Yuml\YumlClient
      */

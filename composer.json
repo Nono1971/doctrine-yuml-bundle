@@ -5,6 +5,7 @@
     "type":                 "symfony-bundle",
     "license":              "MIT",
     "minimum-stability":    "dev",
+    "prefer-stable":        true,
     "authors": [
         {
             "name":     "Bruno Heron",
@@ -43,8 +44,8 @@
         "ext-curl":                       "*",
         "squizlabs/php_codesniffer":      "^2.0.1",
         "doctrine/doctrine-bundle":       "^2.0",
-        "phpunit/phpunit":                "~6.5",
-        "mikey179/vfsstream": "2.0.x-dev"
+        "phpunit/phpunit":                "^8.0",
+        "mikey179/vfsstream":             "^2.0"
     },
     "autoload": {
         "psr-4":    { "Onurb\\Bundle\\YumlBundle\\": "lib/Onurb/Bundle/YumlBundle/" }
