@@ -1,7 +1,6 @@
 <?php
 namespace OnurbTest\Bundle\YumlBundle\Curl;
 
-use bovigo\vfs\vfsStream;
 use Onurb\Bundle\YumlBundle\Curl\Curl;
 use PHPUnit\Framework\TestCase;
 
@@ -57,18 +56,36 @@ class CurlTest extends TestCase
 
     public function testDowloadFile(): void
     {
-        $vfsRoot = vfsStream::setup();
+        $vfsRoot = $this->getVirtualFileSystemRoot();
 
         $fileUrl = 'https://yuml.me/15a98c92.png';
         $fileName = 'test.png';
-        $output = $vfsRoot->url() . '/' . $fileName;
+        $path = $vfsRoot . '/' . $fileName;
 
-        $this->assertFalse(file_exists($output));
+        $this->assertFalse(file_exists($path));
 
         $curl = new Curl($fileUrl);
-        $curl->setOutput($output);
+        $curl->setOutput($path);
         $curl->getResponse();
 
-        $this->assertTrue(file_exists($output));
+        $this->assertTrue(file_exists($path));
+    }
+
+    /**
+     * Creates a virtual file system and returned the root location prefixed with virtual file handler protocol
+     */
+    private function getVirtualFileSystemRoot(): string
+    {
+        if (class_exists('bovigo\vfs\vfsStream')) {
+            return \bovigo\vfs\vfsStream::setup()->url();
+        } elseif (class_exists('\org\bovigo\vfs\vfsStream')) {
+            \org\bovigo\vfs\vfsStream::setup();
+            return \org\bovigo\vfs\vfsStream::url('root');
+        } else {
+            throw new \LogicException(
+                'Missing virtual file system dependency. '
+                . 'Make sure "mikey179/vfsstream" is installed in composer.json'
+            );
+        }
     }
 }
